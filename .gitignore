@@ -1,0 +1,8 @@
+*.sh
+.env.local
+.idea
+places.json
+dist
+http-client.*
+http-request.*
+node_modules

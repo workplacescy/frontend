@@ -1,0 +1,41 @@
+{
+  "name": "frontend",
+  "description": "Frontend part of Workplaces in Cyprus website",
+  "keywords": [
+    "frontend",
+    "workplaces",
+    "cyprus"
+  ],
+  "homepage": "https://t.me/WorkplacesCyBot",
+  "bugs": {
+    "email": "workplacescy@gmail.com",
+    "url": "https://github.com/workplacescy/frontend/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Vladimir",
+    "homepage": "https://t.me/vladimir_mvs",
+    "role": "Developer"
+  },
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@fawmi/vue-google-maps": "*",
+    "@mdi/js": "*",
+    "@sentry/browser": "*",
+    "@sentry/tracing": "*",
+    "@vitejs/plugin-vue": "^3",
+    "dotenv": "*",
+    "sass": "*",
+    "vite": "*",
+    "vite-plugin-html-purgecss": "*",
+    "vite-plugin-minify": "*",
+    "vite-plugin-radar": "*",
+    "vite-plugin-vuetify": "*",
+    "vue": "^3",
+    "vuetify": "next"
+  }
+}
