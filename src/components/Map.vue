@@ -25,8 +25,6 @@ let openedMarkerID = ref()
 
 function openMarker(id, event) {
   openedMarkerID.value = id
-
-  selectPlace(event.latLng)
 }
 
 const selectPlace = (position) => {
