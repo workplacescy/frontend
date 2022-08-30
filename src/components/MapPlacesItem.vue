@@ -8,18 +8,20 @@ const props = defineProps({
 
 <template>
   <div class="poi-info-window">
-    <div>{{ props.place.type }}</div>
+    <div><small>{{ props.place.type }}</small></div>
     <div class="title full-width">
       {{ props.place.name }}
       <VRate :value="props.place.vRate"/>
     </div>
-    <p class="description full-width" v-if="props.place.description !== null">{{ props.place.description }}</p>
+    <p v-if="props.place.description" class="description full-width">{{ props.place.description }}</p>
     <!--          <p class="address full-width">{{ place.address }}</p>-->
-    <div class="full-width">Busyness: {{ props.place.busyness }}</div>
-    <div class="full-width">Location: {{ props.place.location }}</div>
-    <div class="full-width">Size: {{ props.place.size }}</div>
-    <div class="full-width">Sockets: {{ props.place.sockets }}</div>
-    <div class="full-width">View: {{ props.place.view }}</div>
+    <div class="properties">
+      <div class="full-width">Busyness: {{ props.place.busyness }}</div>
+      <div class="full-width">Location: {{ props.place.location }}</div>
+      <div class="full-width">Size: {{ props.place.size }}</div>
+      <div class="full-width">Sockets: {{ props.place.sockets }}</div>
+      <div class="full-width">View: {{ props.place.view }}</div>
+    </div>
     <div class="link"><a :href="props.place.url" target="_blank">View on Google Maps</a></div>
   </div>
 </template>
@@ -36,12 +38,9 @@ const props = defineProps({
   white-space: normal;
 }
 
-.description {
-  margin-bottom: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-.link {
+.description,
+.link,
+.properties {
   margin-top: 0.5rem;
 }
 </style>
