@@ -131,6 +131,11 @@ function swipeEvent(direction) {
 </template>
 
 <style lang="scss">
+html,
+body {
+  height: 100%;
+}
+
 .v-application {
   height: inherit;
 
