@@ -28,12 +28,7 @@ const leftDrawerButton = computed(() => ({
   icon: isLeftDrawerOpen.value ? mdiClose : mdiMenu,
 }))
 
-let isBottomDrawerOpen = ref(!isMobile.value)
-// let isBottomDrawerOpen = ref(false)
-
-const bottomDrawerButton = computed(() => ({
-  icon: isBottomDrawerOpen.value ? mdiChevronDown : mdiChevronUp,
-}))
+let isBottomDrawerOpen = ref(false)
 
 function switchBottomDrawer() {
   isBottomDrawerOpen.value = !isBottomDrawerOpen.value
@@ -89,8 +84,10 @@ function swipeEvent(direction) {
         <Navigation/>
       </v-navigation-drawer>
 
-      <v-navigation-drawer :rail="!isBottomDrawerOpen" border="" class="bottom-drawer pt-5" elevation="4" location="bottom" permanent="" rail-width="40" touchless="">
-        <v-btn :append-icon="bottomDrawerButton.icon" :class="{expanded: isBottomDrawerOpen}" :rounded="0" block="" position="absolute" location="top" size="x-small" variant="tonal" @click.stop="switchBottomDrawer"/>
+      <v-btn :icon="mdiChevronUp" class="bottom-drawer-button" color="secondary" size="small" @click.stop="switchBottomDrawer"/>
+
+      <v-navigation-drawer v-model="isBottomDrawerOpen" class="bottom-drawer" elevation="4" location="bottom" permanent="" touchless="">
+        <v-btn :append-icon="mdiChevronDown" :rounded="0" block="" location="top" position="absolute" size="x-small" variant="tonal" @click.stop="switchBottomDrawer"/>
         <div class="mt-2">
           <PlacesCounterButton :places="filteredPlaces" :rounded="0" class="float-end" variant="tonal" @click.stop="switchBottomDrawer"/>
 
@@ -151,7 +148,8 @@ body {
 
 <style lang="scss" scoped>
 .left-drawer-button {
-  margin: 0.5rem;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
   position: absolute;
   transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
@@ -159,16 +157,19 @@ body {
 }
 
 
-:deep(.bottom-drawer.v-navigation-drawer--active) {
-  &.v-navigation-drawer--rail {
-    .v-navigation-drawer__content {
-      overflow-y: hidden;
-    }
-  }
+.bottom-drawer-button {
+  bottom: 0;
+  left: 50%;
+  margin-bottom: 0.5rem;
+  position: absolute;
+  transform: translateX(-50%);
+  z-index: 1003;
+}
 
-  &:not(.v-navigation-drawer--rail) {
-    height: 95% !important;
-  }
+:deep(.bottom-drawer) {
+  height: 99% !important;
+  padding-top: 1.25rem;
+  z-index: 3000 !important;
 }
 
 
