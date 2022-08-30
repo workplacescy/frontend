@@ -50,6 +50,7 @@ const filteredPlaces = computed(() => places.value.filter(place => Object
     .entries(filters.value)
     .every(([key, needle]) =>
             needle.length === 0
+            || needle.length === undefined
             || (typeof needle === 'string'
                     ? place[key].toLowerCase().includes(needle.toLowerCase())
                     : needle.includes(place[key])

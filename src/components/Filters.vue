@@ -67,7 +67,7 @@ defineExpose({filters})
 
 <template>
   <v-card density="compact" variant="text">
-    <v-card-title v-if="props.title?.length">{{ props.title }}</v-card-title>
+    <v-card-title v-if="props.title">{{ props.title }}</v-card-title>
     <v-card-text>
       <fieldset>
         <legend>City</legend>
