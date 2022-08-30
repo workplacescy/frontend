@@ -91,7 +91,7 @@ function swipeEvent(direction) {
       </v-navigation-drawer>
 
       <v-navigation-drawer :rail="!isBottomDrawerOpen" border="" class="bottom-drawer pt-5" elevation="4" location="bottom" permanent="" rail-width="40" touchless="">
-        <v-btn :append-icon="bottomDrawerButton.icon" :class="{expanded: isBottomDrawerOpen}" :rounded="0" block="" position="absolute" location="top" size="x-small" variant="tonal" @click.stop="switchBottomDrawer" v-touch="{left: () => swipeEvent('Left'), right: () => swipeEvent('Right'), up: () => swipeEvent('Up'), down: () => swipeEvent('Down')}"/>
+        <v-btn :append-icon="bottomDrawerButton.icon" :class="{expanded: isBottomDrawerOpen}" :rounded="0" block="" position="absolute" location="top" size="x-small" variant="tonal" @click.stop="switchBottomDrawer"/>
         <div class="mt-2">
           <PlacesCounterButton :places="filteredPlaces" :rounded="0" class="float-end" variant="tonal" @click.stop="switchBottomDrawer"/>
 
