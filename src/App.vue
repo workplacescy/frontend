@@ -84,7 +84,7 @@ function swipeEvent(direction) {
         <Navigation/>
       </v-navigation-drawer>
 
-      <v-btn :icon="mdiChevronUp" class="bottom-drawer-button" color="secondary" size="small" @click.stop="switchBottomDrawer"/>
+      <v-btn :icon="mdiChevronUp" class="bottom-drawer-button" color="secondary" @click.stop="switchBottomDrawer"/>
 
       <v-navigation-drawer v-model="isBottomDrawerOpen" class="bottom-drawer" elevation="4" location="bottom" permanent="" touchless="">
         <v-btn :append-icon="mdiChevronDown" :rounded="0" block="" location="top" position="absolute" size="x-small" variant="tonal" @click.stop="switchBottomDrawer"/>
