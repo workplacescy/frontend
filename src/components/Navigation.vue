@@ -17,6 +17,7 @@ const props = defineProps({
     <v-card-text>
       <p><a href="/about/">About</a></p>
       <p><a href="https://t.me/WorkplacesCy" rel="nofollow noopener" target="_blank"><img height="20" src="/src/assets/icons/telegram.svg" width="20"></a> <a href="https://t.me/WorkplacesCy" rel="nofollow noopener" target="_blank">Telegram group</a></p>
+      <p><a href="https://ko-fi.com/vladimir_mvs" rel="nofollow noopener" target="_blank"><img height="20" src="/src/assets/icons/ko-fi.svg" width="20" alt="Support Me"></a> <a href="https://ko-fi.com/vladimir_mvs" rel="nofollow noopener" target="_blank">Support Me</a></p>
       <p>Don't forget to buy a coffee!</p>
     </v-card-text>
   </v-card>
