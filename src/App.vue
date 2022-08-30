@@ -83,7 +83,7 @@ function swipeEvent(direction) {
 <template>
   <v-app>
     <!--        <div style="height: 400px; border: 1px solid red" v-touch="{left: () => swipeEvent('Left'), right: () => swipeEvent('Right'), up: () => swipeEvent('Up'), down: () => swipeEvent('Down')}">{{ swipeDirection }}</div>-->
-    <v-btn :icon="leftDrawerButton.icon" :style="{transform: leftDrawerButton.left}" class="left-drawer-button" size="large" @click.stop="switchLeftDrawer"></v-btn>
+    <v-btn :icon="leftDrawerButton.icon" :style="{transform: leftDrawerButton.left}" class="left-drawer-button" @click.stop="switchLeftDrawer"></v-btn>
 
     <template v-if="isMobile">
       <v-navigation-drawer ref="leftDrawerRef" v-model="isLeftDrawerOpen" disable-route-watcher="" temporary="">
@@ -97,7 +97,7 @@ function swipeEvent(direction) {
 
           <Collapse title="Filters">
             <Filters ref="filtersRef"/>
-            <PlacesCounterButton :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:-52px" variant="tonal" @click.stop="switchBottomDrawer"/>
+            <PlacesCounterButton :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:-44px" variant="tonal" @click.stop="switchBottomDrawer"/>
           </Collapse>
 
           <Places :places="filteredPlaces" @select-place="selectPlace"/>
@@ -149,7 +149,8 @@ function swipeEvent(direction) {
 .left-drawer-button {
   margin: 0.5rem;
   position: absolute;
-  transition: transform 250ms;
+  transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
   z-index: 2000;
 }
 

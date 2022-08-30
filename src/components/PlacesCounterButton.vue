@@ -8,7 +8,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <v-btn :variant="props.variant">
+  <v-btn :variant="props.variant" size="small">
     Show
     <PlacesCounter :places="props.places"/>
   </v-btn>
