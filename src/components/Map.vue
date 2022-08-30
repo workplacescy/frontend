@@ -16,7 +16,8 @@ const options = {
   zoom: Math.round(Math.log(window.screen.width / 512)) + 9,
   zoomIncrement: 7,
   mapTypeControl: false,
-  streetViewControl: false
+  streetViewControl: false,
+  zoomControl: false,
 }
 
 const mapRef = ref()
