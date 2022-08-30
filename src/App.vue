@@ -17,7 +17,6 @@ const isMobile = useDisplay().mobile
 
 let leftDrawerRef = ref()
 
-// let isLeftDrawerOpen = ref(true)
 let isLeftDrawerOpen = ref(false)
 
 function switchLeftDrawer() {
@@ -83,10 +82,10 @@ function swipeEvent(direction) {
 <template>
   <v-app>
     <!--        <div style="height: 400px; border: 1px solid red" v-touch="{left: () => swipeEvent('Left'), right: () => swipeEvent('Right'), up: () => swipeEvent('Up'), down: () => swipeEvent('Down')}">{{ swipeDirection }}</div>-->
-    <v-btn :icon="leftDrawerButton.icon" :style="{transform: leftDrawerButton.left}" class="left-drawer-button" @click.stop="switchLeftDrawer"></v-btn>
+    <v-btn :icon="leftDrawerButton.icon" :style="{transform: leftDrawerButton.left}" class="left-drawer-button" @click.stop="switchLeftDrawer"/>
 
     <template v-if="isMobile">
-      <v-navigation-drawer ref="leftDrawerRef" v-model="isLeftDrawerOpen" disable-route-watcher="" temporary="">
+      <v-navigation-drawer ref="leftDrawerRef" v-model="isLeftDrawerOpen" disable-route-watcher="">
         <Navigation/>
       </v-navigation-drawer>
 
