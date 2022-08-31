@@ -28,6 +28,7 @@ const options = {
     'Limassol',
     'Nicosia',
     'Paphos',
+    'Protaras',
   ],
   busyness: [
     'Low',
