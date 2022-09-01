@@ -120,7 +120,7 @@ defineExpose({filters})
       </fieldset>
 
       <fieldset>
-        <v-text-field v-model="filters.name" class="w-50" color="primary" density="compact" hide-details label="Name" variant="underlined"></v-text-field>
+        <v-text-field v-model="filters.name" class="w-50" color="primary" density="compact" hide-details label="Name" type="search" variant="underlined"></v-text-field>
       </fieldset>
     </v-card-text>
   </v-card>
