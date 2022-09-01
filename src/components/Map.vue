@@ -6,6 +6,10 @@ const props = defineProps({
   places: Object,
   highlightedPlaceId: Number,
   selectedPlacePosition: Object,
+  isMobile: {
+    type: Boolean,
+    default: false
+  }
 })
 
 const options = {
@@ -13,7 +17,7 @@ const options = {
     lat: parseFloat(import.meta.env.VITE_MAP_CENTER_LATITUDE),
     lng: parseFloat(import.meta.env.VITE_MAP_CENTER_LONGITUDE),
   },
-  zoom: Math.round(Math.log(window.screen.width / 512)) + 8,
+  zoom: Math.round(Math.log(window.screen.width / 512)) + (props.isMobile ? 8 : 9),
   zoomIncrement: 7,
   mapTypeControl: false,
   streetViewControl: false,

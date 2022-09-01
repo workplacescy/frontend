@@ -121,7 +121,7 @@ function swipeEvent(direction) {
     </template>
 
     <v-main>
-      <Map ref="mapRef" :highlightedPlaceId="highlightedPlaceId" :places="filteredPlaces"/>
+      <Map ref="mapRef" :highlightedPlaceId="highlightedPlaceId" :places="filteredPlaces" :is-mobile="isMobile"/>
     </v-main>
   </v-app>
 </template>
