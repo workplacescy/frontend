@@ -13,7 +13,7 @@ const options = {
     lat: parseFloat(import.meta.env.VITE_MAP_CENTER_LATITUDE),
     lng: parseFloat(import.meta.env.VITE_MAP_CENTER_LONGITUDE),
   },
-  zoom: Math.round(Math.log(window.screen.width / 512)) + 9,
+  zoom: Math.round(Math.log(window.screen.width / 512)) + 8,
   zoomIncrement: 7,
   mapTypeControl: false,
   streetViewControl: false,
