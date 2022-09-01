@@ -22,6 +22,15 @@ const options = {
   mapTypeControl: false,
   streetViewControl: false,
   zoomControl: false,
+  cluster: {
+    imagePath: "https://raw.githubusercontent.com/googlemaps/v3-utility-library/37c2a570c318122df57b83140f5f54665b9359e5/packages/markerclustererplus/images/m"
+  },
+  marker: {
+    icons: {
+      default: "",
+      highlighted: "https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_blue.png"
+    }
+  }
 }
 
 const mapRef = ref()
@@ -42,15 +51,12 @@ defineExpose({selectPlace})
 
 <template>
   <GMapMap ref="mapRef" :center="options.center" :options="options" :zoom="options.zoom">
-    <!--    <GMapCluster :zoomOnClick="true">-->
-    <!--https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2.png-->
-    <!--http://maps.gstatic.com/mapfiles/markers2/boost-marker-mapview.png-->
-    <!--    <GMapMarker :icon="props.highlightedPlaceId === place.id ? {scaledSize:{width: 77, height: 77}, url: ''} : ''" v-for="place in props.places" :key="place.id" :clickable="true" :position="place.position" @click="openMarker(place.id, $event)">-->
-    <GMapMarker :icon="props.highlightedPlaceId === place.id ? 'https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_blue.png' : ''" v-for="place in props.places" :key="place.id" :clickable="true" :position="place.position" @click="openMarker(place.id, $event)">
-      <GMapInfoWindow :opened="openedMarkerID === place.id">
-        <MapPlace :place="place"/>
-      </GMapInfoWindow>
-    </GMapMarker>
-    <!--    </GMapCluster>-->
+    <GMapCluster :zoomOnClick="true" :imagePath="options.cluster.imagePath">
+      <GMapMarker :icon="props.highlightedPlaceId === place.id ? options.marker.icons.highlighted : options.marker.icons.default" v-for="place in props.places" :key="place.id" :clickable="true" :position="place.position" @click="openMarker(place.id, $event)">
+        <GMapInfoWindow :opened="openedMarkerID === place.id">
+          <MapPlace :place="place"/>
+        </GMapInfoWindow>
+      </GMapMarker>
+    </GMapCluster>
   </GMapMap>
 </template>
