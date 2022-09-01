@@ -49,14 +49,14 @@ const options = {
     'Few',
     'Many',
   ],
-  type: [
-    'Cafe',
-    'Coworking',
-  ],
   view: [
     'Street',
     'Garden',
     'Sea',
+  ],
+  type: [
+    'Cafe',
+    'Coworking',
   ],
 }
 
@@ -106,16 +106,16 @@ defineExpose({filters})
       </fieldset>
 
       <fieldset>
-        <legend>Type</legend>
-        <div v-for="value in options.type">
-          <v-checkbox v-model="filters.type" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
+        <legend>View</legend>
+        <div v-for="value in options.view">
+          <v-checkbox v-model="filters.view" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
         </div>
       </fieldset>
 
       <fieldset>
-        <legend>View</legend>
-        <div v-for="value in options.view">
-          <v-checkbox v-model="filters.view" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
+        <legend>Type</legend>
+        <div v-for="value in options.type">
+          <v-checkbox v-model="filters.type" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
         </div>
       </fieldset>
 
