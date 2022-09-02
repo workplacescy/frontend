@@ -1,5 +1,6 @@
 <script setup>
 import VRate from "./VRate.vue";
+import ComplainButton from "./ComplainButton.vue";
 
 const props = defineProps({
   place: Object,
@@ -24,6 +25,9 @@ const props = defineProps({
         <div>View: {{ props.place.view }}</div>
       </div>
       <div class="link"><a :href="props.place.url" target="_blank">View on Google Maps</a></div>
+      <div style="position:relative">
+        <ComplainButton/>
+      </div>
     </v-card-text>
   </v-card>
 </template>
