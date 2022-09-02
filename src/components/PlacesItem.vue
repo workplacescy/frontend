@@ -14,7 +14,7 @@ const props = defineProps({
       <VRate :value="props.place.vRate"/>
     </v-card-title>
     <v-card-text>
-      <p class="description" v-if="props.place.description">{{ props.place.description }}</p>
+      <p v-if="props.place.description" class="description">{{ props.place.description }}</p>
       <address><p>{{ props.place.address }}</p></address>
       <div class="properties">
         <div>Busyness: {{ props.place.busyness }}</div>
