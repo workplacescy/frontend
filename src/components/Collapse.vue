@@ -9,6 +9,8 @@ const props = defineProps({
   }
 })
 
+const emit = defineEmits(['change'])
+
 // const isOpen = ref(true)
 const isOpen = ref(false)
 
@@ -18,6 +20,7 @@ const icon = computed(() => (
 
 function switchCollapse() {
   isOpen.value = !isOpen.value;
+  emit('change', isOpen.value)
 }
 </script>
 

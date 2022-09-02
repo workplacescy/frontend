@@ -19,7 +19,6 @@ const props = defineProps({
       <address><p>{{ props.place.address }}</p></address>
       <div class="properties">
         <div>Busyness: {{ props.place.busyness }}</div>
-        <div>Location: {{ props.place.location }}</div>
         <div>Size: {{ props.place.size }}</div>
         <div>Sockets: {{ props.place.sockets }}</div>
         <div>View: {{ props.place.view }}</div>

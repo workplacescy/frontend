@@ -17,7 +17,6 @@ const props = defineProps({
     <!--          <p class="address full-width">{{ place.address }}</p>-->
     <div class="properties">
       <div class="full-width">Busyness: {{ props.place.busyness }}</div>
-      <div class="full-width">Location: {{ props.place.location }}</div>
       <div class="full-width">Size: {{ props.place.size }}</div>
       <div class="full-width">Sockets: {{ props.place.sockets }}</div>
       <div class="full-width">View: {{ props.place.view }}</div>

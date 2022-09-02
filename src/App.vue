@@ -4,7 +4,6 @@ import {useDisplay} from "vuetify";
 import {mdiChevronDown, mdiChevronUp, mdiClose, mdiMenu} from '@mdi/js'
 import {useApi} from "./composable/api.js"
 import Navigation from "./components/Navigation.vue";
-import Collapse from "./components/Collapse.vue";
 import Filters from "./components/Filters.vue";
 import Map from "./components/Map.vue";
 import Places from "./components/Places.vue";
@@ -52,6 +51,12 @@ const filteredPlaces = computed(() => places.value.filter(place => Object
     )
 ))
 
+const isfiltersExpanded = ref(false)
+
+function changeCollapse(isExpanded) {
+  isfiltersExpanded.value = isExpanded
+}
+
 const mapRef = ref()
 
 const highlightedPlaceId = ref()
@@ -88,24 +93,22 @@ function swipeEvent(direction) {
 
       <v-navigation-drawer v-model="isBottomDrawerOpen" class="bottom-drawer" elevation="4" location="bottom" permanent="" touchless="">
         <v-btn :append-icon="mdiChevronDown" :rounded="0" block="" location="top" position="absolute" size="x-small" variant="tonal" @click.stop="switchBottomDrawer"/>
-        <div class="mt-2">
-          <PlacesCounterButton :places="filteredPlaces" :rounded="0" class="float-end" variant="tonal" @click.stop="switchBottomDrawer"/>
+        <PlacesCounterButton :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:10px" variant="tonal" @click.stop="switchBottomDrawer"/>
 
-          <Collapse title="Filters">
-            <Filters ref="filtersRef"/>
-            <PlacesCounterButton :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:-44px" variant="tonal" @click.stop="switchBottomDrawer"/>
-          </Collapse>
+        <Filters ref="filtersRef" @change-collapse="changeCollapse"/>
 
-          <Places :places="filteredPlaces" @select-place="selectPlace"/>
-        </div>
+        <PlacesCounterButton v-if="isfiltersExpanded" :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:-44px" variant="tonal" @click.stop="switchBottomDrawer"/>
+
+        <Places :places="filteredPlaces" @select-place="selectPlace"/>
       </v-navigation-drawer>
     </template>
     <template v-else>
       <v-navigation-drawer ref="leftDrawerRef" v-model="isLeftDrawerOpen" disable-route-watcher="" elevation="4" width="500">
         <div class="panel">
-          <div class="filters">
-            <Filters ref="filtersRef" title="Filters"/>
+          <div class="filters overflow-y-auto">
+            <Filters ref="filtersRef"/>
           </div>
+
           <div class="places">
             <Places :places="filteredPlaces" @highlight-place="highlightPlace" @select-place="selectPlace">
               <template #title>
@@ -121,7 +124,7 @@ function swipeEvent(direction) {
     </template>
 
     <v-main>
-      <Map ref="mapRef" :highlightedPlaceId="highlightedPlaceId" :places="filteredPlaces" :is-mobile="isMobile"/>
+      <Map ref="mapRef" :highlightedPlaceId="highlightedPlaceId" :is-mobile="isMobile" :places="filteredPlaces"/>
     </v-main>
   </v-app>
 </template>

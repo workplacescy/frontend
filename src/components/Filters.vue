@@ -2,13 +2,9 @@
 import {ref} from "vue";
 import {useDisplay} from "vuetify";
 import {mdiCheckboxBlankOutline, mdiCheckboxOutline} from '@mdi/js';
+import Collapse from "./Collapse.vue";
 
-const props = defineProps({
-  title: {
-    type: String,
-    required: false,
-  }
-})
+defineEmits(['changeCollapse'])
 
 const filters = ref({
   name: '',
@@ -61,84 +57,81 @@ const options = {
 }
 
 const isMobile = useDisplay().mobile
-const height = (isMobile.value ? 30 : 22) + 'px'
+const height = (isMobile.value ? 30 : 24) + 'px'
 
 defineExpose({filters})
 </script>
 
 <template>
   <v-card density="compact" variant="text">
-    <v-card-title v-if="props.title">{{ props.title }}</v-card-title>
+    <v-card-title>Featured</v-card-title>
     <v-card-text>
       <fieldset>
-        <legend>City</legend>
-        <div v-for="value in options.city">
-          <v-checkbox v-model="filters.city" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
-        </div>
+        <v-checkbox v-model="filters.sockets" :false-icon="mdiCheckboxBlankOutline" label="Many sockets" :true-icon="mdiCheckboxOutline" value="Many" color="primary" density="compact" hide-details></v-checkbox>
+        <v-checkbox v-model="filters.busyness" :false-icon="mdiCheckboxBlankOutline" label="Low busyness" :true-icon="mdiCheckboxOutline" value="Low" color="primary" density="compact" hide-details></v-checkbox>
+        <v-checkbox v-model="filters.view" :false-icon="mdiCheckboxBlankOutline" label="Sea view" :true-icon="mdiCheckboxOutline" value="Sea" color="primary" density="compact" hide-details></v-checkbox>
       </fieldset>
 
-      <fieldset>
-        <legend>Busyness</legend>
-        <div v-for="value in options.busyness">
-          <v-checkbox v-model="filters.busyness" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
-        </div>
-      </fieldset>
+      <Collapse title="Filters" @change="$emit('changeCollapse', $event)">
+        <fieldset>
+          <legend>City</legend>
+          <div v-for="value in options.city">
+            <v-checkbox v-model="filters.city" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
+          </div>
+        </fieldset>
 
-      <fieldset>
-        <legend>Location</legend>
-        <div v-for="value in options.location">
-          <v-checkbox v-model="filters.location" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
-        </div>
-      </fieldset>
+        <fieldset>
+          <legend>Sockets</legend>
+          <div v-for="value in options.sockets">
+            <v-checkbox v-model="filters.sockets" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
+          </div>
+        </fieldset>
 
-      <fieldset>
-        <legend>Size</legend>
-        <div v-for="value in options.size">
-          <v-checkbox v-model="filters.size" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
-        </div>
-      </fieldset>
+        <fieldset>
+          <legend>Busyness</legend>
+          <div v-for="value in options.busyness">
+            <v-checkbox v-model="filters.busyness" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
+          </div>
+        </fieldset>
 
-      <fieldset>
-        <legend>Sockets</legend>
-        <div v-for="value in options.sockets">
-          <v-checkbox v-model="filters.sockets" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
-        </div>
-      </fieldset>
+        <fieldset>
+          <legend>View</legend>
+          <div v-for="value in options.view">
+            <v-checkbox v-model="filters.view" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
+          </div>
+        </fieldset>
 
-      <fieldset>
-        <legend>View</legend>
-        <div v-for="value in options.view">
-          <v-checkbox v-model="filters.view" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
-        </div>
-      </fieldset>
+        <fieldset>
+          <legend>Size</legend>
+          <div v-for="value in options.size">
+            <v-checkbox v-model="filters.size" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
+          </div>
+        </fieldset>
 
-      <fieldset>
-        <legend>Type</legend>
-        <div v-for="value in options.type">
-          <v-checkbox v-model="filters.type" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <v-text-field v-model="filters.name" class="w-50" color="primary" density="compact" hide-details label="Name" type="search" variant="underlined"></v-text-field>
-      </fieldset>
+        <fieldset>
+          <legend>Type</legend>
+          <div v-for="value in options.type">
+            <v-checkbox v-model="filters.type" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
+          </div>
+        </fieldset>
+      </Collapse>
     </v-card-text>
   </v-card>
 </template>
 
 <style scoped>
-* {
+:deep(.v-selection-control--density-compact) {
   --v-input-control-height: v-bind('height') !important;
+  --v-selection-control-size: 22px;
 }
 
-:deep(.v-selection-control__wrapper),
-:deep(.v-selection-control__input) {
-  height: var(--v-input-control-height) !important;
-  width: var(--v-input-control-height) !important;
+:deep(.v-selection-control__input .v-icon) {
+  margin-left: -2px;
 }
 
 :deep(.v-label) {
   font-size: small;
+  margin-left: 4px;
 }
 
 fieldset + fieldset {
