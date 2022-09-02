@@ -64,22 +64,22 @@ defineExpose({filters})
 
 <template>
   <v-card density="compact" variant="text">
-    <v-card-title>Featured</v-card-title>
+    <v-card-title>City</v-card-title>
     <v-card-text>
       <fieldset>
+        <div v-for="value in options.city">
+          <v-checkbox v-model="filters.city" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Featured</legend>
         <v-checkbox v-model="filters.sockets" :false-icon="mdiCheckboxBlankOutline" label="Many sockets" :true-icon="mdiCheckboxOutline" value="Many" color="primary" density="compact" hide-details></v-checkbox>
         <v-checkbox v-model="filters.busyness" :false-icon="mdiCheckboxBlankOutline" label="Low busyness" :true-icon="mdiCheckboxOutline" value="Low" color="primary" density="compact" hide-details></v-checkbox>
         <v-checkbox v-model="filters.view" :false-icon="mdiCheckboxBlankOutline" label="Sea view" :true-icon="mdiCheckboxOutline" value="Sea" color="primary" density="compact" hide-details></v-checkbox>
       </fieldset>
 
       <Collapse title="Filters" @change="$emit('changeCollapse', $event)">
-        <fieldset>
-          <legend>City</legend>
-          <div v-for="value in options.city">
-            <v-checkbox v-model="filters.city" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
-          </div>
-        </fieldset>
-
         <fieldset>
           <legend>Sockets</legend>
           <div v-for="value in options.sockets">
