@@ -10,7 +10,6 @@ const filters = ref({
   name: '',
   city: [],
   busyness: [],
-  location: [],
   size: [],
   sockets: [],
   type: [],
@@ -30,10 +29,6 @@ const options = {
     'Low',
     'Average',
     'High',
-  ],
-  location: [
-    'Convenient',
-    'Unhandy',
   ],
   size: [
     'Small',
