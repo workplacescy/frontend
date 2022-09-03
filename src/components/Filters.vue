@@ -10,6 +10,8 @@ const filters = ref({
   name: '',
   city: [],
   busyness: [],
+  cuisine: [],
+  noise: [],
   size: [],
   sockets: [],
   type: [],
@@ -29,6 +31,15 @@ const options = {
     'Low',
     'Average',
     'High',
+  ],
+  cuisine: [
+    'Coffee & snacks',
+    'Full',
+  ],
+  noise: [
+    'Quite',
+    'Medium',
+    'Noisy',
   ],
   size: [
     'Small',
@@ -70,8 +81,10 @@ defineExpose({filters})
       <fieldset>
         <legend>Featured</legend>
         <v-checkbox v-model="filters.sockets" :false-icon="mdiCheckboxBlankOutline" label="Many sockets" :true-icon="mdiCheckboxOutline" value="Many" color="primary" density="compact" hide-details></v-checkbox>
+        <v-checkbox v-model="filters.noise" :false-icon="mdiCheckboxBlankOutline" label="Quite place" :true-icon="mdiCheckboxOutline" value="Quite" color="primary" density="compact" hide-details></v-checkbox>
         <v-checkbox v-model="filters.busyness" :false-icon="mdiCheckboxBlankOutline" label="Low busyness" :true-icon="mdiCheckboxOutline" value="Low" color="primary" density="compact" hide-details></v-checkbox>
         <v-checkbox v-model="filters.view" :false-icon="mdiCheckboxBlankOutline" label="Sea view" :true-icon="mdiCheckboxOutline" value="Sea" color="primary" density="compact" hide-details></v-checkbox>
+        <v-checkbox v-model="filters.cuisine" :false-icon="mdiCheckboxBlankOutline" label="Good for lunch" :true-icon="mdiCheckboxOutline" value="Full" color="primary" density="compact" hide-details></v-checkbox>
       </fieldset>
 
       <Collapse title="Filters" @change="$emit('changeCollapse', $event)">
@@ -79,6 +92,20 @@ defineExpose({filters})
           <legend>Sockets</legend>
           <div v-for="value in options.sockets">
             <v-checkbox v-model="filters.sockets" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Noise</legend>
+          <div v-for="value in options.noise">
+            <v-checkbox v-model="filters.noise" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Size</legend>
+          <div v-for="value in options.size">
+            <v-checkbox v-model="filters.size" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
           </div>
         </fieldset>
 
@@ -97,9 +124,9 @@ defineExpose({filters})
         </fieldset>
 
         <fieldset>
-          <legend>Size</legend>
-          <div v-for="value in options.size">
-            <v-checkbox v-model="filters.size" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
+          <legend>Cuisine</legend>
+          <div v-for="value in options.cuisine">
+            <v-checkbox v-model="filters.cuisine" :false-icon="mdiCheckboxBlankOutline" :label="value" :true-icon="mdiCheckboxOutline" :value="value" color="primary" density="compact" hide-details></v-checkbox>
           </div>
         </fieldset>
 

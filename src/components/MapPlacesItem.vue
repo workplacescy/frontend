@@ -16,10 +16,12 @@ const props = defineProps({
     <p v-if="props.place.description" class="description full-width">{{ props.place.description }}</p>
     <!--          <p class="address full-width">{{ place.address }}</p>-->
     <div class="properties">
+      <div class="full-width">Sockets: {{ props.place.sockets }}</div>
+      <div class="full-width">Noise: {{ props.place.noise }}</div>
       <div class="full-width">Busyness: {{ props.place.busyness }}</div>
       <div class="full-width">Size: {{ props.place.size }}</div>
-      <div class="full-width">Sockets: {{ props.place.sockets }}</div>
       <div class="full-width">View: {{ props.place.view }}</div>
+      <div class="full-width">Cuisine: {{ props.place.cuisine }}</div>
     </div>
     <div class="link"><a :href="props.place.url" target="_blank">View on Google Maps</a></div>
   </div>
