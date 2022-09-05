@@ -70,18 +70,10 @@ function selectPlace(placeId, placePosition) {
   highlightedPlaceId.value = placeId
   mapRef.value.selectPlace(placePosition)
 }
-
-let swipeDirection = ref('None')
-
-function swipeEvent(direction) {
-  console.log('touch: ' + direction)
-  swipeDirection.value = direction
-}
 </script>
 
 <template>
   <v-app>
-    <!--        <div style="height: 400px; border: 1px solid red" v-touch="{left: () => swipeEvent('Left'), right: () => swipeEvent('Right'), up: () => swipeEvent('Up'), down: () => swipeEvent('Down')}">{{ swipeDirection }}</div>-->
     <v-btn :icon="leftDrawerButton.icon" :style="{transform: leftDrawerButton.left}" class="left-drawer-button" @click.stop="switchLeftDrawer"/>
 
     <template v-if="isMobile">
