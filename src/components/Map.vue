@@ -17,8 +17,11 @@ const options = {
     lat: parseFloat(import.meta.env.VITE_MAP_CENTER_LATITUDE),
     lng: parseFloat(import.meta.env.VITE_MAP_CENTER_LONGITUDE),
   },
-  zoom: Math.round(Math.log(window.screen.width / 512)) + (props.isMobile ? 8 : 9),
-  zoomIncrement: 8,
+  zooms: {
+    map: Math.round(Math.log(window.screen.width / 512)) + (props.isMobile ? 8 : 9),
+    clusterIncrement: props.isMobile ? 4 : 3,
+    selectedIncrement: 8,
+  },
   mapTypeControl: false,
   streetViewControl: false,
   zoomControl: false,
@@ -42,7 +45,7 @@ function openMarker(id, event) {
 }
 
 const selectPlace = (position) => {
-  mapRef.value.$mapObject.setZoom(options.zoom + options.zoomIncrement)
+  mapRef.value.$mapObject.setZoom(options.zooms.map + options.zooms.selectedIncrement)
   mapRef.value.panTo(position)
 }
 
@@ -50,9 +53,9 @@ defineExpose({selectPlace})
 </script>
 
 <template>
-  <GMapMap ref="mapRef" :center="options.center" :options="options" :zoom="options.zoom">
-    <GMapCluster :zoomOnClick="true" :imagePath="options.cluster.imagePath">
-      <GMapMarker :icon="props.highlightedPlaceId === place.id ? options.marker.icons.highlighted : options.marker.icons.default" v-for="place in props.places" :key="place.id" :clickable="true" :position="place.position" @click="openMarker(place.id, $event)">
+  <GMapMap ref="mapRef" :center="options.center" :options="options" :zoom="options.zooms.map">
+    <GMapCluster :imagePath="options.cluster.imagePath" :maxZoom="options.zooms.map + options.zooms.clusterIncrement" :zoomOnClick="true">
+      <GMapMarker v-for="place in props.places" :key="place.id" :clickable="true" :icon="props.highlightedPlaceId === place.id ? options.marker.icons.highlighted : options.marker.icons.default" :position="place.position" @click="openMarker(place.id, $event)">
         <GMapInfoWindow :opened="openedMarkerID === place.id">
           <MapPlace :place="place"/>
         </GMapInfoWindow>
