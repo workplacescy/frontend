@@ -40,7 +40,7 @@ const options = {
         fillOpacity: 1,
         strokeWeight: 1,
         strokeColor: '#4285f4',
-        anchor: {x: 16, y: 16},
+        anchor: {x: 12, y: 12},
       }
     }
   }
