@@ -1,6 +1,6 @@
 <script setup>
-import {onMounted, ref} from "vue";
-import {UseGeolocation} from '@vueuse/components'
+import {onMounted, ref, watch} from "vue";
+import {useGeolocation, watchOnce} from "@vueuse/core";
 import {mdiCrosshairsGps, mdiRadioboxMarked} from '@mdi/js';
 import MapPlace from "./MapPlacesItem.vue";
 
@@ -47,16 +47,37 @@ const options = {
 }
 
 const mapRef = ref()
-
 const geoLocationButtonRef = ref()
 
-const askGeoLocation = ref(false)
-
 onMounted(() => {
-  mapRef.value.$mapPromise.then((map) => {
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(geoLocationButtonRef.value);
-  });
+  addControls(mapRef.value, geoLocationButtonRef.value)
 })
+
+function addControls(mapContainer, controls) {
+  mapContainer.$mapPromise.then(map => {
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controls);
+  });
+}
+
+const hasGeoLocation = ref(false)
+const geoLocation = ref()
+
+function askGeoLocation() {
+  if (!hasGeoLocation.value) {
+    const {coords} = useGeolocation()
+
+    watch(coords, (coords) => {
+      geoLocation.value = {lat: coords.latitude, lng: coords.longitude}
+      hasGeoLocation.value = true
+    })
+
+    watchOnce(coords, (coords) => {
+      selectPlace(geoLocation.value)
+    })
+  } else {
+    selectPlace(geoLocation.value)
+  }
+}
 
 let openedMarkerID = ref()
 
@@ -75,11 +96,9 @@ defineExpose({selectPlace})
 <template>
   <GMapMap ref="mapRef" :center="options.center" :options="options" :zoom="options.zooms.map">
     <div ref="geoLocationButtonRef">
-      <v-btn :icon="mdiCrosshairsGps" style="margin: 0.5rem" @click="askGeoLocation = true"/>
+      <v-btn :icon="mdiCrosshairsGps" elevation="1" style="margin: 0.5rem" title="Locate me" @click="askGeoLocation"/>
     </div>
-    <UseGeolocation v-if="askGeoLocation" v-slot="{coords: {latitude, longitude }}">
-      <GMapMarker :icon="options.marker.icons.current" :position="{lat: latitude, lng: longitude}"/>
-    </UseGeolocation>
+    <GMapMarker v-if="hasGeoLocation" :icon="options.marker.icons.current" :position="geoLocation"/>
 
     <GMapCluster :imagePath="options.cluster.imagePath" :maxZoom="options.zooms.map + options.zooms.clusterIncrement" :zoomOnClick="true">
       <GMapMarker v-for="place in props.places" :key="place.id" :clickable="true" :icon="props.highlightedPlaceId === place.id ? options.marker.icons.highlighted : options.marker.icons.default" :position="place.position" @click="openMarker(place.id, $event)">

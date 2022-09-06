@@ -28,7 +28,6 @@
     "@sentry/browser": "*",
     "@sentry/tracing": "*",
     "@vitejs/plugin-vue": "3.0.3",
-    "@vueuse/components": "*",
     "@vueuse/core": "*",
     "dotenv": "*",
     "sass": "*",
