@@ -1,5 +1,7 @@
 <script setup>
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
+import {UseGeolocation} from '@vueuse/components'
+import {mdiCrosshairsGps, mdiRadioboxMarked} from '@mdi/js';
 import MapPlace from "./MapPlacesItem.vue";
 
 const props = defineProps({
@@ -31,12 +33,30 @@ const options = {
   marker: {
     icons: {
       default: "",
-      highlighted: "https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_blue.png"
+      highlighted: "https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_blue.png",
+      current: {
+        path: mdiRadioboxMarked,
+        fillColor: '#4285f4',
+        fillOpacity: 1,
+        strokeWeight: 1,
+        strokeColor: '#4285f4',
+        anchor: {x: 16, y: 16},
+      }
     }
   }
 }
 
 const mapRef = ref()
+
+const geoLocationButtonRef = ref()
+
+const askGeoLocation = ref(false)
+
+onMounted(() => {
+  mapRef.value.$mapPromise.then((map) => {
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(geoLocationButtonRef.value);
+  });
+})
 
 let openedMarkerID = ref()
 
@@ -54,6 +74,13 @@ defineExpose({selectPlace})
 
 <template>
   <GMapMap ref="mapRef" :center="options.center" :options="options" :zoom="options.zooms.map">
+    <div ref="geoLocationButtonRef">
+      <v-btn :icon="mdiCrosshairsGps" style="margin: 0.5rem" @click="askGeoLocation = true"/>
+    </div>
+    <UseGeolocation v-if="askGeoLocation" v-slot="{coords: {latitude, longitude }}">
+      <GMapMarker :icon="options.marker.icons.current" :position="{lat: latitude, lng: longitude}"/>
+    </UseGeolocation>
+
     <GMapCluster :imagePath="options.cluster.imagePath" :maxZoom="options.zooms.map + options.zooms.clusterIncrement" :zoomOnClick="true">
       <GMapMarker v-for="place in props.places" :key="place.id" :clickable="true" :icon="props.highlightedPlaceId === place.id ? options.marker.icons.highlighted : options.marker.icons.default" :position="place.position" @click="openMarker(place.id, $event)">
         <GMapInfoWindow :opened="openedMarkerID === place.id">

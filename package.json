@@ -23,19 +23,21 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@fawmi/vue-google-maps": "*",
+    "@fawmi/vue-google-maps": "0.9.72",
     "@mdi/js": "*",
     "@sentry/browser": "*",
     "@sentry/tracing": "*",
-    "@vitejs/plugin-vue": "^3",
+    "@vitejs/plugin-vue": "3.0.3",
+    "@vueuse/components": "*",
+    "@vueuse/core": "*",
     "dotenv": "*",
     "sass": "*",
-    "vite": "*",
+    "vite": "3.0.9",
     "vite-plugin-html-purgecss": "*",
     "vite-plugin-minify": "*",
     "vite-plugin-radar": "*",
-    "vite-plugin-vuetify": "*",
+    "vite-plugin-vuetify": "1.0.0-alpha.14",
     "vue": "^3",
-    "vuetify": "next"
+    "vuetify": "3.0.0-beta.9"
   }
 }
