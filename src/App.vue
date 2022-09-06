@@ -1,6 +1,7 @@
 <script setup>
 import {computed, ref} from "vue"
 import {useDisplay} from "vuetify";
+import {useSwipe} from "@vueuse/core";
 import {mdiChevronDown, mdiChevronUp, mdiClose, mdiMenu} from '@mdi/js'
 import {useApi} from "./composable/api.js"
 import Navigation from "./components/Navigation.vue";
@@ -27,11 +28,21 @@ const leftDrawerButton = computed(() => ({
   icon: isLeftDrawerOpen.value ? mdiClose : mdiMenu,
 }))
 
+const bottomDrawerButtonRef = ref()
+
 const isBottomDrawerOpen = ref(false)
 
 function switchBottomDrawer() {
   isBottomDrawerOpen.value = !isBottomDrawerOpen.value
 }
+
+useSwipe(bottomDrawerButtonRef, {
+  onSwipeEnd(e, direction) {
+    if (direction === 'DOWN') {
+      switchBottomDrawer()
+    }
+  }
+})
 
 const {places} = useApi(import.meta.env.VITE_API_URL);
 
@@ -84,7 +95,7 @@ function selectPlace(placeId, placePosition) {
       <v-btn :icon="mdiChevronUp" class="bottom-drawer-button" color="secondary" @click.stop="switchBottomDrawer"/>
 
       <v-navigation-drawer v-model="isBottomDrawerOpen" class="bottom-drawer" elevation="4" location="bottom" permanent="" touchless="">
-        <v-btn :append-icon="mdiChevronDown" :rounded="0" block="" location="top" position="absolute" size="x-small" variant="tonal" @click.stop="switchBottomDrawer"/>
+        <v-btn ref="bottomDrawerButtonRef" :append-icon="mdiChevronDown" :rounded="0" block="" location="top" position="absolute" size="x-small" variant="tonal" @click.stop="switchBottomDrawer"/>
         <PlacesCounterButton :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:10px" variant="tonal" @click.stop="switchBottomDrawer"/>
 
         <Filters ref="filtersRef" @change-collapse="changeCollapse"/>
