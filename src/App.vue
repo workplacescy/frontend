@@ -14,9 +14,9 @@ import PlacesCounterButton from "./components/PlacesCounterButton.vue";
 // const isMobile = ref(false)
 const isMobile = useDisplay().mobile
 
-let leftDrawerRef = ref()
+const leftDrawerRef = ref();
 
-let isLeftDrawerOpen = ref(false)
+const isLeftDrawerOpen = ref(false);
 
 function switchLeftDrawer() {
   isLeftDrawerOpen.value = !isLeftDrawerOpen.value
@@ -27,7 +27,7 @@ const leftDrawerButton = computed(() => ({
   icon: isLeftDrawerOpen.value ? mdiClose : mdiMenu,
 }))
 
-let isBottomDrawerOpen = ref(false)
+const isBottomDrawerOpen = ref(false)
 
 function switchBottomDrawer() {
   isBottomDrawerOpen.value = !isBottomDrawerOpen.value
