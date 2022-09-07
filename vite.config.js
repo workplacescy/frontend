@@ -1,5 +1,7 @@
 import {resolve} from 'path'
 import {defineConfig, loadEnv} from 'vite';
+import {createHtmlPlugin} from "vite-plugin-html";
+import minify from "vite-plugin-minify";
 import vue from '@vitejs/plugin-vue'
 // import htmlPurge from 'vite-plugin-html-purgecss'
 // import minify from "vite-plugin-minify";
@@ -24,19 +26,22 @@ export default mode => {
     },
     plugins: [
       // htmlPurge(['marker-label']),
-      // minify({
-      //   collapseBooleanAttributes: true,
-      //   collapseWhitespace: true,
-      //   decodeEntities: true,
-      //   noNewlinesBeforeTagClose: true,
-      //   removeAttributeQuotes: true,
-      //   removeComments: true,
-      //   removeEmptyAttributes: true,
-      //   removeRedundantAttributes: true,
-      //   removeScriptTypeAttributes: true,
-      //   removeStyleLinkTypeAttributes: true,
-      //   useShortDoctype: true,
-      // }),
+      createHtmlPlugin({minify: false}),
+      minify({
+        collapseBooleanAttributes: true,
+        collapseWhitespace: true,
+        decodeEntities: true,
+        keepClosingSlash: false,
+        noNewlinesBeforeTagClose: true,
+        processConditionalComments: false,
+        removeComments: true,
+        removeEmptyAttributes: true,
+        removeEmptyElements: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true,
+      }),
       VitePluginRadar({
         analytics: {
           id: process.env.VITE_GOOGLE_ANALYTICS_ID,

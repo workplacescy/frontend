@@ -32,6 +32,7 @@
     "dotenv": "*",
     "sass": "*",
     "vite": "3.0.9",
+    "vite-plugin-html": "*",
     "vite-plugin-html-purgecss": "*",
     "vite-plugin-minify": "*",
     "vite-plugin-radar": "*",
