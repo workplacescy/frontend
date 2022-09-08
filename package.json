@@ -27,17 +27,17 @@
     "@mdi/js": "*",
     "@sentry/browser": "*",
     "@sentry/tracing": "*",
-    "@vitejs/plugin-vue": "3.0.3",
+    "@vitejs/plugin-vue": "*",
     "@vueuse/core": "*",
     "dotenv": "*",
     "sass": "*",
-    "vite": "3.0.9",
+    "vite": "*",
     "vite-plugin-html": "*",
     "vite-plugin-html-purgecss": "*",
     "vite-plugin-minify": "*",
     "vite-plugin-radar": "*",
-    "vite-plugin-vuetify": "1.0.0-alpha.14",
+    "vite-plugin-vuetify": "*",
     "vue": "^3",
-    "vuetify": "3.0.0-beta.9"
+    "vuetify": "next"
   }
 }
