@@ -1,6 +1,5 @@
 <script setup>
 import {ref} from "vue";
-import {useDisplay} from "vuetify";
 import {mdiCheckboxBlankOutline, mdiCheckboxOutline} from '@mdi/js';
 import Collapse from "./Collapse.vue";
 
@@ -61,9 +60,6 @@ const options = {
     'Coworking',
   ],
 }
-
-const isMobile = useDisplay().mobile
-const height = (isMobile.value ? 30 : 24) + 'px'
 
 defineExpose({filters})
 </script>
@@ -142,11 +138,6 @@ defineExpose({filters})
 </template>
 
 <style scoped>
-:deep(.v-selection-control--density-compact) {
-  --v-input-control-height: v-bind('height') !important;
-  --v-selection-control-size: 22px;
-}
-
 :deep(.v-selection-control__input .v-icon) {
   margin-left: -2px;
 }

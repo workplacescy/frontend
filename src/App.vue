@@ -132,7 +132,7 @@ function selectPlace(placeId, placePosition) {
   </v-app>
 </template>
 
-<style lang="scss">
+<style>
 html,
 body {
   height: 100%;
@@ -140,19 +140,14 @@ body {
 
 .v-application {
   height: inherit;
-
-  &__wrap {
-    min-height: 100% !important;
-  }
 }
 
-.v-theme--light {
-  --v-high-emphasis-opacity: 1 !important;
-  --v-medium-emphasis-opacity: 1 !important;
+.v-application__wrap {
+  min-height: 100% !important;
 }
 </style>
 
-<style lang="scss" scoped>
+<style scoped>
 .left-drawer-button {
   margin-left: 0.5rem;
   margin-top: 0.5rem;

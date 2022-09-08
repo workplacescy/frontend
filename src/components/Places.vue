@@ -22,5 +22,3 @@ defineEmits(['highlightPlace', 'selectPlace'])
     <PlaceItem v-for="place in props.places" :key="place.id" :place="place" @click="$emit('selectPlace', place.id, place.position)" @mouseenter.passive="$emit('highlightPlace', place.id)"/>
   </v-card>
 </template>
-
-<style scoped></style>

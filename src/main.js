@@ -27,6 +27,10 @@ createApp(App)
               primary: '#d57800',
               secondary: '#4e5b31'
             },
+            variables: {
+              'high-emphasis-opacity': 1,
+              'medium-emphasis-opacity': 1,
+            }
           },
         },
       },

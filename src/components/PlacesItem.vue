@@ -33,7 +33,7 @@ const props = defineProps({
   </v-card>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 :deep(.v-card__overlay) {
   background: rgb(var(--v-theme-primary));
 }

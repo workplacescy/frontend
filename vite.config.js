@@ -48,7 +48,7 @@ export default mode => {
         },
       }),
       vue(),
-      vuetify(),
+      vuetify({styles: {configFile: 'src/settings.scss'}}),
     ],
   });
 }
