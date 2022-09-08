@@ -85,22 +85,22 @@ function selectPlace(placeId, placePosition) {
 
 <template>
   <v-app>
-    <v-btn :icon="leftDrawerButton.icon" :style="{transform: leftDrawerButton.left}" class="left-drawer-button" @click.stop="switchLeftDrawer"/>
+    <v-btn :icon="leftDrawerButton.icon" :style="{transform: leftDrawerButton.left}" aria-label="Switch left drawer" class="left-drawer-button" @click="switchLeftDrawer"/>
 
     <template v-if="isMobile">
       <v-navigation-drawer ref="leftDrawerRef" v-model="isLeftDrawerOpen" disable-route-watcher="">
         <Navigation/>
       </v-navigation-drawer>
 
-      <v-btn :icon="mdiChevronUp" class="bottom-drawer-button" color="secondary" @click.stop="switchBottomDrawer"/>
+      <v-btn :icon="mdiChevronUp" aria-label="Switch bottom drawer" class="bottom-drawer-button" color="secondary" style="margin-bottom:1.875rem" @click="switchBottomDrawer"/>
 
       <v-navigation-drawer v-model="isBottomDrawerOpen" class="bottom-drawer" elevation="4" location="bottom" permanent="" touchless="">
-        <v-btn ref="bottomDrawerButtonRef" :append-icon="mdiChevronDown" :rounded="0" block="" location="top" position="absolute" size="x-small" variant="tonal" @click.stop="switchBottomDrawer"/>
-        <PlacesCounterButton :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:10px" variant="tonal" @click.stop="switchBottomDrawer"/>
+        <v-btn ref="bottomDrawerButtonRef" :append-icon="mdiChevronDown" :rounded="0" aria-label="Switch bottom drawer" block="" location="top" position="absolute" size="x-small" variant="tonal" @click="switchBottomDrawer"/>
+        <PlacesCounterButton :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:10px" variant="tonal" @click="switchBottomDrawer"/>
 
         <Filters ref="filtersRef" @change-collapse="changeCollapse"/>
 
-        <PlacesCounterButton v-if="isfiltersExpanded" :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:-44px" variant="tonal" @click.stop="switchBottomDrawer"/>
+        <PlacesCounterButton v-if="isfiltersExpanded" :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:-44px" variant="tonal" @click="switchBottomDrawer"/>
 
         <Places :places="filteredPlaces" @select-place="selectPlace"/>
       </v-navigation-drawer>

@@ -25,7 +25,7 @@ function switchCollapse() {
 </script>
 
 <template>
-  <v-btn :prepend-icon="icon" :rounded="0" color="primary" variant="text" @click.stop="switchCollapse">{{ props.title }}</v-btn>
+  <v-btn :prepend-icon="icon" :rounded="0" :aria-label="props.title" color="primary" variant="text" @click="switchCollapse">{{ props.title }}</v-btn>
   <v-expand-transition>
     <div v-show="isOpen">
       <slot/>
