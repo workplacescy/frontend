@@ -6,7 +6,7 @@ import Collapse from "./Collapse.vue";
 defineEmits(['changeCollapse'])
 
 const filters = ref({
-  name: '',
+  title: '',
   city: [],
   busyness: [],
   cuisine: [],

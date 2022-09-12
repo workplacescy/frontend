@@ -1,5 +1,5 @@
 export default class Analytics {
-    trackInfoWindow(id, name, placeId) {
+    trackInfoWindow(id, title, placeId) {
         if (typeof gtag !== "function") {
             return;
         }
@@ -10,7 +10,7 @@ export default class Analytics {
             items: [
                 {
                     item_id: id,
-                    item_name: name,
+                    item_title: title,
                     location_id: placeId,
                 }
             ]

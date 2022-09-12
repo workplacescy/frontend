@@ -10,7 +10,7 @@ const props = defineProps({
   <div class="poi-info-window">
     <div><small>{{ props.place.type }}</small></div>
     <div class="title full-width">
-      {{ props.place.name }}
+      {{ props.place.title }}
       <VRate :value="props.place.vRate"/>
     </div>
     <p v-if="props.place.description" class="description full-width">{{ props.place.description }}</p>

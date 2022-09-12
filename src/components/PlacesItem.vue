@@ -11,7 +11,7 @@ const props = defineProps({
   <v-card :link="true" class="pt-4" density="compact" variant="text">
     <v-card-subtitle>{{ props.place.type }}</v-card-subtitle>
     <v-card-title tag="h2">
-      {{ props.place.name }}
+      {{ props.place.title }}
       <VRate :value="props.place.vRate"/>
     </v-card-title>
     <v-card-text>
