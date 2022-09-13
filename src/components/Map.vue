@@ -101,7 +101,7 @@ defineExpose({selectPlace})
     <GMapMarker v-if="hasGeoLocation" :icon="options.marker.icons.current" :position="geoLocation"/>
 
     <GMapCluster :imagePath="options.cluster.imagePath" :maxZoom="options.zooms.map + options.zooms.clusterIncrement" :zoomOnClick="true">
-      <GMapMarker v-for="place in props.places" :key="place.id" :clickable="true" :icon="props.highlightedPlaceId === place.id ? options.marker.icons.highlighted : options.marker.icons.default" :position="place.position" @click="openMarker(place.id, $event)">
+      <GMapMarker v-for="place in props.places" :key="place.id" :clickable="true" :icon="props.highlightedPlaceId === place.id ? options.marker.icons.highlighted : options.marker.icons.default" :position="place.position" :title="place.title" @click="openMarker(place.id, $event)">
         <GMapInfoWindow :opened="openedMarkerID === place.id">
           <MapPlace :place="place"/>
         </GMapInfoWindow>
