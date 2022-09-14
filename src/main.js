@@ -13,7 +13,7 @@ import './main.scss'
 createApp(App)
     .use(createVuetify({
       display: {
-        mobileBreakpoint: 'md'
+        mobileBreakpoint: 'sm'
       },
       icons: {
         sets: {
