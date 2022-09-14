@@ -1,7 +1,7 @@
 export const humanize = {
   sockets: value => {
     const map = {
-      'None': 'Without value',
+      'None': 'Without sockets',
       'Few': 'Few sockets',
       'Many': 'Many sockets',
     }
