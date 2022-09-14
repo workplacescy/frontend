@@ -10,11 +10,9 @@ const props = defineProps({
 
 <template>
   <v-card :link="true" class="pt-4" density="compact" variant="text">
+    <VRate :value="props.place.vRate" class="float-right mr-4"/>
     <v-card-subtitle>{{ props.place.type }}</v-card-subtitle>
-    <v-card-title tag="h2">
-      {{ props.place.title }}
-      <VRate :value="props.place.vRate"/>
-    </v-card-title>
+    <v-card-title tag="h2">{{ props.place.title }}</v-card-title>
     <v-card-text>
       <p v-if="props.place.description" class="description">{{ props.place.description }}</p>
       <address><p>{{ props.place.address }}</p></address>
