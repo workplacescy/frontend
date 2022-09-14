@@ -1,6 +1,7 @@
 @use 'vuetify/settings' with (
   $color-pack: false,
   $body-font-family: (system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"),
+  $card-border-radius: 0,
   $card-title-compact-line-height: initial,
   $card-title-overflow: initial,
   $input-control-height: 44px,
