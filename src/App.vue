@@ -186,6 +186,7 @@ body {
 
 .filters {
   grid-area: filters;
+  scrollbar-width: thin;
 }
 
 .navigation {
@@ -196,5 +197,6 @@ body {
   grid-area: places;
   height: 100%;
   overflow-x: hidden;
+  scrollbar-width: thin;
 }
 </style>
