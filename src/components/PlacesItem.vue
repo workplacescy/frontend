@@ -14,7 +14,9 @@ const hasPhotos = computed(() => props.place.photos.length > 0)
 
 <template>
   <v-card :class="{'with-photos': hasPhotos}" :link="true" class="pt-4" density="compact" variant="text">
-    <PlacesItemImage v-if="hasPhotos" :photos="props.place.photos" class="mb-4"/>
+    <div v-if="hasPhotos" class="mb-4">
+      <PlacesItemImage :photos="props.place.photos"/>
+    </div>
     <VRate :value="props.place.vRate" class="float-right mr-4"/>
     <v-card-subtitle>{{ props.place.type }}</v-card-subtitle>
     <v-card-title tag="h2">{{ props.place.title }}</v-card-title>
