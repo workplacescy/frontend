@@ -20,7 +20,7 @@ const options = {
     lng: parseFloat(import.meta.env.VITE_MAP_CENTER_LONGITUDE),
   },
   zooms: {
-    map: Math.round(Math.log(window.screen.width / 512)) + (props.isMobile ? 8 : 9),
+    map: Math.log(window.screen.width / 512) + (props.isMobile ? 8.5 : 9),
     clusterIncrement: props.isMobile ? 4 : 3,
     selectedIncrement: 8,
   },
