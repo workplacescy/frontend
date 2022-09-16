@@ -22,7 +22,7 @@ const options = {
   zooms: {
     map: Math.log(window.screen.width / 512) + (props.isMobile ? 8.5 : 9),
     clusterIncrement: props.isMobile ? 4 : 3,
-    selectedIncrement: 8,
+    selectedIncrement: props.isMobile ? 9 : 8,
   },
   mapTypeControl: false,
   streetViewControl: false,
