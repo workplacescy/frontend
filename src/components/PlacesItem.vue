@@ -13,7 +13,7 @@ const hasPhotos = computed(() => props.place.photos.length > 0)
 </script>
 
 <template>
-  <v-card :class="{'with-photos': hasPhotos}" :link="true" class="pt-4" density="compact" variant="text">
+  <v-card :class="hasPhotos ? 'with-photos' : 'pt-4'" :link="true" density="compact" variant="text">
     <div v-if="hasPhotos" class="mb-4">
       <PlacesItemImage :photos="props.place.photos"/>
     </div>
@@ -23,11 +23,10 @@ const hasPhotos = computed(() => props.place.photos.length > 0)
     <v-card-text>
       <p v-if="props.place.description" class="description">{{ props.place.description }}</p>
       <address><p>{{ props.place.address }}</p></address>
-      <div class="properties">
-        <PlacesItemProperties :place="props.place"/>
-      </div>
-      <div class="link"><a :href="props.place.url" target="_blank">View on Google Maps</a></div>
-      <div style="position:relative">
+      <div class="d-flex align-end flex-row">
+        <div class="properties">
+          <PlacesItemProperties :place="props.place"/>
+        </div>
         <ComplainButton/>
       </div>
     </v-card-text>
@@ -37,10 +36,6 @@ const hasPhotos = computed(() => props.place.photos.length > 0)
 <style scoped>
 .v-card + .v-card.with-photos {
   margin-top: 1rem;
-}
-
-.v-card.with-photos {
-  padding-top: 0 !important;
 }
 
 :deep(.v-card__overlay) {
