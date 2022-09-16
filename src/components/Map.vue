@@ -90,7 +90,7 @@ const selectPlace = (position) => {
   mapRef.value.panTo(position)
 }
 
-defineExpose({selectPlace})
+defineExpose({openMarker, selectPlace})
 </script>
 
 <template>

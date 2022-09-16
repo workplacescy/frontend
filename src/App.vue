@@ -80,6 +80,7 @@ function selectPlace(placeId, placePosition) {
   switchBottomDrawer()
   highlightedPlaceId.value = placeId
   mapRef.value.selectPlace(placePosition)
+  mapRef.value.openMarker(placeId)
 }
 </script>
 
