@@ -9,11 +9,9 @@ const props = defineProps({
 
 <template>
   <div class="poi-info-window">
+    <VRate class="float-end mr-1 mt-1" :value="props.place.vRate"/>
     <div><small>{{ props.place.type }}</small></div>
-    <div class="title full-width">
-      {{ props.place.title }}
-      <VRate :value="props.place.vRate"/>
-    </div>
+    <div class="font-weight-bold">{{ props.place.title }}</div>
     <p v-if="props.place.description" class="description full-width">{{ props.place.description }}</p>
     <div class="full-width properties">
       <PlacesItemProperties :place="props.place"/>
@@ -23,17 +21,6 @@ const props = defineProps({
 </template>
 
 <style scoped>
-.title {
-  align-items: start;
-  display: flex;
-  font-weight: bold;
-  justify-content: space-between;
-  margin-bottom: 0;
-  margin-top: 0;
-  padding-top: 0;
-  white-space: normal;
-}
-
 .description,
 .link,
 .properties {

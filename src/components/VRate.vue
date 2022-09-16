@@ -17,8 +17,7 @@ const color = computed(() => useColorByValueHsl({ratio: props.value / 5}))
 
 <style scoped>
 div {
-  flex-shrink: 0;
-  font-size: small;
+  font-size: smaller;
   line-height: 4ch;
   text-align: center;
   width: 4ch;
