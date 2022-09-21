@@ -171,7 +171,7 @@ body {
 :deep(.bottom-drawer) {
   height: 99% !important;
   padding-top: 1.25rem;
-  z-index: 3000 !important;
+  z-index: 2000 !important;
 }
 
 

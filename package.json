@@ -31,6 +31,7 @@
     "@vueuse/core": "*",
     "dotenv": "*",
     "sass": "*",
+    "swiper": "*",
     "vite": "*",
     "vite-plugin-html": "*",
     "vite-plugin-html-purgecss": "*",

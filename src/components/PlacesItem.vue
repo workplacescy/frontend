@@ -1,21 +1,27 @@
 <script setup>
+import {computed} from "vue";
 import VRate from "./VRate.vue";
-import PlacesItemImage from "./PlacesItemImage.vue";
+import PlacesItemPhotos from "./PlacesItemPhotos.vue";
 import PlacesItemProperties from "./PlacesItemProperties.vue";
 import ComplainButton from "./ComplainButton.vue";
-import {computed} from "vue";
 
 const props = defineProps({
   place: Object,
 })
 
+const emit = defineEmits(['clickPlaceImage'])
+
 const hasPhotos = computed(() => props.place.photos.length > 0)
+
+function clickPhoto(index, event) {
+  emit('clickPlacePhoto', props.place, index, event)
+}
 </script>
 
 <template>
   <v-card :class="hasPhotos ? 'with-photos' : 'pt-4'" :link="true" density="compact" variant="text">
     <div v-if="hasPhotos" class="mb-4">
-      <PlacesItemImage :photos="props.place.photos"/>
+      <PlacesItemPhotos :photos="props.place.photos" @click-photo="clickPhoto"/>
     </div>
     <VRate :value="props.place.vRate" class="float-right mr-4"/>
     <v-card-subtitle>{{ props.place.type }}</v-card-subtitle>
