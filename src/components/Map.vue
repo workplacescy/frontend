@@ -59,16 +59,19 @@ function addControls(mapContainer, controls) {
   });
 }
 
+const isLocationSearching = ref(false)
 const hasGeoLocation = ref(false)
 const geoLocation = ref()
 
 function askGeoLocation() {
   if (!hasGeoLocation.value) {
+    isLocationSearching.value = true
     const {coords} = useGeolocation()
 
     watch(coords, (coords) => {
       geoLocation.value = {lat: coords.latitude, lng: coords.longitude}
       hasGeoLocation.value = true
+      isLocationSearching.value = false
     })
 
     watchOnce(coords, (coords) => {
@@ -96,7 +99,7 @@ defineExpose({openMarker, selectPlace})
 <template>
   <GMapMap ref="mapRef" :center="options.center" :options="options" :zoom="options.zooms.map">
     <div ref="geoLocationButtonRef">
-      <v-btn :icon="mdiCrosshairsGps" aria-label="Locate me" elevation="1" style="margin-right:0.5rem;margin-bottom:1rem" title="Locate me" @click="askGeoLocation"/>
+      <v-btn :icon="mdiCrosshairsGps" aria-label="Locate me" elevation="1" style="margin-right:0.5rem;margin-bottom:1rem" title="Locate me" :loading="isLocationSearching" @click="askGeoLocation"/>
     </div>
     <GMapMarker v-if="hasGeoLocation" :icon="options.marker.icons.current" :position="geoLocation"/>
 
