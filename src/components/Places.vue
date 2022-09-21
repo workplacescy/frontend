@@ -16,7 +16,7 @@ defineEmits(['highlightPlace', 'selectPlace'])
 
 <template>
   <v-card class="overflow-y-auto" density="compact" variant="text">
-    <v-card-title class="text-end" v-if="slots.title">
+    <v-card-title v-if="slots.title" class="text-end">
       <slot name="title"></slot>
     </v-card-title>
     <PlaceItem v-for="place in props.places" :key="place.id" :place="place" @click="$emit('selectPlace', place.id, place.position)" @mouseenter.passive="$emit('highlightPlace', place.id)"/>
