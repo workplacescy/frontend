@@ -24,6 +24,7 @@ const options = {
     clusterIncrement: props.isMobile ? 4 : 3,
     selectedIncrement: props.isMobile ? 9 : 8,
   },
+  fullscreenControl: false,
   mapTypeControl: false,
   streetViewControl: false,
   zoomControl: false,
