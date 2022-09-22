@@ -9,7 +9,7 @@ const props = defineProps({
   place: Object,
 })
 
-const emit = defineEmits(['clickPlaceImage'])
+const emit = defineEmits(['clickPlacePhoto'])
 
 const hasPhotos = computed(() => props.place.photos.length > 0)
 
