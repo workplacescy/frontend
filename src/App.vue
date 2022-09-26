@@ -88,7 +88,10 @@ const placesRef = ref()
 
 function selectListPlace(placeId) {
   selectedPlaceId.value = placeId
-  placesRef.value.scrollToPlace(placeId)
+
+  if (!isMobile.value) {
+    placesRef.value.scrollToPlace(placeId)
+  }
 }
 </script>
 
@@ -111,7 +114,7 @@ function selectListPlace(placeId) {
 
         <PlacesCounterButton v-if="isfiltersExpanded" :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:-44px" variant="tonal" @click="switchBottomDrawer"/>
 
-        <Places :places="filteredPlaces" @select-place="selectMapPlace"/>
+        <Places ref="placesRef" :places="filteredPlaces" :selected-place-id="selectedPlaceId" @select-place="selectMapPlace"/>
       </v-navigation-drawer>
     </template>
     <template v-else>

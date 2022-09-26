@@ -39,7 +39,7 @@ function clickPlacePhoto(place, index, event) {
 
 function scrollToPlace(placeId) {
   const element = document.getElementById('place' + placeId);
-  element.parentNode.parentNode.scrollTo(0, element.offsetTop)
+  element.parentNode.parentNode.scrollTo({top: element.offsetTop, behavior: 'smooth'})
 }
 
 defineExpose({scrollToPlace})
