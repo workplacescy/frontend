@@ -7,6 +7,10 @@ import ComplainButton from "./ComplainButton.vue";
 
 const props = defineProps({
   place: Object,
+  isSelected: {
+    type: Boolean,
+    default: false,
+  }
 })
 
 const emit = defineEmits(['clickPlacePhoto'])
@@ -19,7 +23,7 @@ function clickPhoto(index, event) {
 </script>
 
 <template>
-  <v-card :class="hasPhotos ? 'with-photos' : 'pt-4'" :link="true" density="compact" variant="text">
+  <v-card :class="[hasPhotos ? 'with-photos' : 'pt-4', isSelected ? 'selected' : '']" :link="true" density="compact" variant="text">
     <div v-if="hasPhotos" class="mb-4">
       <PlacesItemPhotos :photos="props.place.photos" @click-photo="clickPhoto"/>
     </div>
@@ -46,6 +50,10 @@ function clickPhoto(index, event) {
 
 :deep(.v-card__overlay) {
   background: rgb(var(--v-theme-primary));
+}
+
+.v-card.selected > :deep(.v-card__overlay) {
+  opacity: calc(0.12 * var(--v-theme-overlay-multiplier));
 }
 
 h2 {

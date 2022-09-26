@@ -14,6 +14,8 @@ const props = defineProps({
   }
 })
 
+const emit = defineEmits(['clickMarker'])
+
 const options = {
   center: {
     lat: parseFloat(import.meta.env.VITE_MAP_CENTER_LATITUDE),
@@ -85,8 +87,9 @@ function askGeoLocation() {
 
 let openedMarkerID = ref()
 
-function openMarker(id, event) {
+function openMarker(id) {
   openedMarkerID.value = id
+  emit('clickMarker', id)
 }
 
 const selectPlace = (position) => {

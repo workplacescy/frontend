@@ -76,11 +76,19 @@ function highlightPlace(placeId) {
   highlightedPlaceId.value = placeId
 }
 
-function selectPlace(placeId, placePosition) {
+function selectMapPlace(placeId, placePosition) {
   switchBottomDrawer()
   highlightedPlaceId.value = placeId
   mapRef.value.selectPlace(placePosition)
   mapRef.value.openMarker(placeId)
+}
+
+const selectedPlaceId = ref()
+const placesRef = ref()
+
+function selectListPlace(placeId) {
+  selectedPlaceId.value = placeId
+  placesRef.value.scrollToPlace(placeId)
 }
 </script>
 
@@ -103,7 +111,7 @@ function selectPlace(placeId, placePosition) {
 
         <PlacesCounterButton v-if="isfiltersExpanded" :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:-44px" variant="tonal" @click="switchBottomDrawer"/>
 
-        <Places :places="filteredPlaces" @select-place="selectPlace"/>
+        <Places :places="filteredPlaces" @select-place="selectMapPlace"/>
       </v-navigation-drawer>
     </template>
     <template v-else>
@@ -114,7 +122,7 @@ function selectPlace(placeId, placePosition) {
           </div>
 
           <div class="places">
-            <Places :places="filteredPlaces" @highlight-place="highlightPlace" @select-place="selectPlace">
+            <Places ref="placesRef" :places="filteredPlaces" :selected-place-id="selectedPlaceId" @highlight-place="highlightPlace" @select-place="selectMapPlace">
               <template #title>
                 <PlacesCounter :places="filteredPlaces"/>
               </template>
@@ -128,7 +136,7 @@ function selectPlace(placeId, placePosition) {
     </template>
 
     <v-main>
-      <Map ref="mapRef" :highlightedPlaceId="highlightedPlaceId" :is-mobile="isMobile" :places="filteredPlaces"/>
+      <Map ref="mapRef" :highlightedPlaceId="highlightedPlaceId" :is-mobile="isMobile" :places="filteredPlaces" @click-marker="selectListPlace"/>
     </v-main>
   </v-app>
 </template>
