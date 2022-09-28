@@ -35,8 +35,8 @@ const options = {
   },
   marker: {
     icons: {
-      default: "",
-      highlighted: "https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_blue.png",
+      default: "https://www.google.com/maps/vt/icon/name=assets/icons/poi/tactile/pinlet_outline_v4-2-medium.png,assets/icons/poi/tactile/pinlet_v4-2-medium.png,assets/icons/poi/quantum/pinlet/dot_pinlet-2-medium.png&highlight=c5221f,ea4335,ffffff?scale=1",
+      highlighted: "https://www.google.com/maps/vt/icon/name=assets/icons/spotlight/spotlight_pin_v4_outline-2-medium.png,assets/icons/spotlight/spotlight_pin_v4-2-medium.png,assets/icons/spotlight/spotlight_pin_v4_dot-2-medium.png&highlight=c5221f,ea4335,b31412?scale=1",
       current: {
         path: mdiRadioboxMarked,
         fillColor: '#4285f4',
