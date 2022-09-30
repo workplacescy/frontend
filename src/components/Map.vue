@@ -26,10 +26,7 @@ const options = {
     clusterIncrement: props.isMobile ? 4 : 3,
     selectedIncrement: props.isMobile ? 9 : 8,
   },
-  fullscreenControl: false,
-  mapTypeControl: false,
-  streetViewControl: false,
-  zoomControl: false,
+  disableDefaultUI: true,
   cluster: {
     imagePath: "https://raw.githubusercontent.com/googlemaps/v3-utility-library/37c2a570c318122df57b83140f5f54665b9359e5/packages/markerclustererplus/images/m"
   },
@@ -107,7 +104,7 @@ defineExpose({openMarker, selectPlace})
 <template>
   <GMapMap ref="mapRef" :center="options.center" :options="options" :zoom="options.zooms.map">
     <div ref="geoLocationButtonRef">
-      <v-btn :icon="mdiCrosshairsGps" aria-label="Locate me" elevation="1" style="margin-right:0.5rem;margin-bottom:1rem" title="Locate me" :loading="isLocationSearching" @click="askGeoLocation"/>
+      <v-btn :icon="mdiCrosshairsGps" :loading="isLocationSearching" aria-label="Locate me" class="mb-4 mr-2" elevation="1" title="Locate me" @click="askGeoLocation"/>
     </div>
     <GMapMarker v-if="hasGeoLocation" :icon="options.marker.icons.current" :position="geoLocation"/>
 
