@@ -23,7 +23,7 @@ function clickPhoto(index, event) {
 </script>
 
 <template>
-  <v-card :class="[hasPhotos ? 'with-photos' : 'pt-4', isSelected ? 'selected' : '']" :link="true" density="compact" variant="text">
+  <v-card :class="[hasPhotos ? 'with-photos' : 'pt-4', isSelected ? 'selected' : '']" :link="true" :to="{name: 'place', params: {id: props.place.id}}" density="compact" variant="text">
     <div v-if="hasPhotos" class="mb-4">
       <PlacesItemPhotos :photos="props.place.photos" @click-photo="clickPhoto"/>
     </div>

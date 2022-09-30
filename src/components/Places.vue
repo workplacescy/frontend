@@ -1,5 +1,5 @@
 <script setup>
-import {computed, ref, useSlots} from "vue";
+import {computed, ref, useSlots, watch} from "vue";
 import {useDisplay} from "vuetify";
 import {mdiClose} from '@mdi/js'
 import PlaceItem from "./PlacesItem.vue";
@@ -37,12 +37,15 @@ function clickPlacePhoto(place, index, event) {
   showBigPhotos.value = true
 }
 
-function scrollToPlace(placeId) {
-  const element = document.getElementById('place' + placeId);
-  element.parentNode.parentNode.scrollTo({top: element.offsetTop, behavior: 'smooth'})
-}
+watch(
+    () => props.selectedPlaceId,
+    id => {
+      const element = document.getElementById('place' + id);
+      const container = element.parentNode.parentNode;
 
-defineExpose({scrollToPlace})
+      container.scrollTo({top: element.offsetTop, behavior: 'smooth'})
+    }
+)
 </script>
 
 <template>

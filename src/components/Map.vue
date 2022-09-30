@@ -1,20 +1,20 @@
 <script setup>
 import {onMounted, ref, watch} from "vue";
+import {useRouter} from 'vue-router'
 import {useGeolocation, watchOnce} from "@vueuse/core";
 import {mdiCrosshairsGps, mdiRadioboxMarked} from '@mdi/js';
 import MapPlace from "./MapPlacesItem.vue";
 
 const props = defineProps({
   places: Object,
-  highlightedPlaceId: Number,
-  selectedPlacePosition: Object,
+  highlightedMarkerId: Number,
+  openedMarkerId: Number,
+  openedMarkerPosition: Object,
   isMobile: {
     type: Boolean,
     default: false
   }
 })
-
-const emit = defineEmits(['clickMarker'])
 
 const options = {
   center: {
@@ -75,30 +75,32 @@ function askGeoLocation() {
     })
 
     watchOnce(coords, (coords) => {
-      selectPlace(geoLocation.value)
+      selectMarker(geoLocation.value)
     })
   } else {
-    selectPlace(geoLocation.value)
+    selectMarker(geoLocation.value)
   }
 }
 
-let openedMarkerID = ref()
+const router = useRouter()
 
 function clickMarker(id) {
-  openMarker(id)
-  emit('clickMarker', id)
+  router.push({name: 'place', params: {id: id}})
 }
 
-function openMarker(id) {
-  openedMarkerID.value = id
+function selectMarker(position) {
+  mapRef.value.$mapPromise.then((map) => {
+    map.setZoom(options.zooms.map + options.zooms.selectedIncrement)
+    map.panTo(position)
+  })
 }
 
-const selectPlace = (position) => {
-  mapRef.value.$mapObject.setZoom(options.zooms.map + options.zooms.selectedIncrement)
-  mapRef.value.panTo(position)
-}
-
-defineExpose({openMarker, selectPlace})
+watch(
+    () => props.openedMarkerPosition,
+    position => {
+      selectMarker(position)
+    }
+)
 </script>
 
 <template>
@@ -109,8 +111,8 @@ defineExpose({openMarker, selectPlace})
     <GMapMarker v-if="hasGeoLocation" :icon="options.marker.icons.current" :position="geoLocation"/>
 
     <GMapCluster :imagePath="options.cluster.imagePath" :maxZoom="options.zooms.map + options.zooms.clusterIncrement" :zoomOnClick="true">
-      <GMapMarker v-for="place in props.places" :key="place.id" :clickable="true" :icon="props.highlightedPlaceId === place.id ? options.marker.icons.highlighted : options.marker.icons.default" :position="place.position" :title="place.title" @click="clickMarker(place.id)">
-        <GMapInfoWindow :opened="openedMarkerID === place.id">
+      <GMapMarker v-for="place in props.places" :key="place.id" :clickable="true" :icon="props.highlightedMarkerId === place.id ? options.marker.icons.highlighted : options.marker.icons.default" :position="place.position" :title="place.title" @click="clickMarker(place.id)">
+        <GMapInfoWindow :opened="props.openedMarkerId === place.id">
           <MapPlace :place="place"/>
         </GMapInfoWindow>
       </GMapMarker>

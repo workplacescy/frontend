@@ -2,15 +2,19 @@ import "./components/Sentry.js";
 // import Analytics from "./src/Analytics";
 
 import {createApp} from 'vue'
+import {createHead} from "@vueuse/head"
 import {createVuetify} from "vuetify";
 import {mdi} from 'vuetify/iconsets/mdi-svg'
 import VueGoogleMaps from '@fawmi/vue-google-maps'
 import App from './App.vue'
+import router from './router'
 
 import 'vuetify/styles'
 import './main.scss'
 
 createApp(App)
+    .use(router)
+    .use(createHead())
     .use(createVuetify({
       display: {
         mobileBreakpoint: 'sm'

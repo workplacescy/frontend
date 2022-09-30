@@ -29,6 +29,7 @@
     "@sentry/tracing": "*",
     "@vitejs/plugin-vue": "*",
     "@vueuse/core": "*",
+    "@vueuse/head": "*",
     "dotenv": "*",
     "sass": "*",
     "swiper": "*",
@@ -39,6 +40,7 @@
     "vite-plugin-radar": "*",
     "vite-plugin-vuetify": "*",
     "vue": "^3",
+    "vue-router": "*",
     "vuetify": "next"
   }
 }
