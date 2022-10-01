@@ -76,10 +76,10 @@ const filteredPlaces = computed(() => places.value.filter(place => Object
     )
 ))
 
-const isfiltersExpanded = ref(false)
+const isFiltersExpanded = ref(false)
 
 function changeCollapse(isExpanded) {
-  isfiltersExpanded.value = isExpanded
+  isFiltersExpanded.value = isExpanded
 }
 
 const mapRef = ref()
@@ -139,7 +139,7 @@ watchPostEffect(() => {
 
         <Filters ref="filtersRef" @change-collapse="changeCollapse"/>
 
-        <PlacesCounterButton v-if="isfiltersExpanded" :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:-44px" variant="tonal" @click="switchBottomDrawer"/>
+        <PlacesCounterButton v-if="isFiltersExpanded" :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:-44px" variant="tonal" @click="switchBottomDrawer"/>
 
         <Places ref="placesRef" :places="filteredPlaces" :selected-place-id="selectedPlaceId" @click-place="switchBottomDrawer"/>
       </v-navigation-drawer>
