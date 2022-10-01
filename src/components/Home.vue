@@ -159,7 +159,7 @@ watchPostEffect(() => {
             </Places>
           </div>
           <nav class="navigation">
-            <Navigation :show-footer="true" :show-title="false"/>
+            <Navigation :show-title="false"/>
           </nav>
         </div>
       </v-navigation-drawer>

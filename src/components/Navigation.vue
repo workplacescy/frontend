@@ -4,10 +4,6 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  showFooter: {
-    type: Boolean,
-    default: false,
-  }
 })
 </script>
 
