@@ -117,10 +117,6 @@ watchPostEffect(() => {
 
   isNotFound.value = false
 
-  if (!isMobile) {
-    switchBottomDrawer()
-  }
-
   selectedPlaceId.value = currentPlace.value.id
   selectedPlacePosition.value = currentPlace.value.position
 })
@@ -145,7 +141,7 @@ watchPostEffect(() => {
 
         <PlacesCounterButton v-if="isfiltersExpanded" :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:-44px" variant="tonal" @click="switchBottomDrawer"/>
 
-        <Places ref="placesRef" :places="filteredPlaces" :selected-place-id="selectedPlaceId"/>
+        <Places ref="placesRef" :places="filteredPlaces" :selected-place-id="selectedPlaceId" @click-place="switchBottomDrawer"/>
       </v-navigation-drawer>
     </template>
     <template v-else>

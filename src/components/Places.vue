@@ -17,7 +17,7 @@ const props = defineProps({
 
 const slots = useSlots();
 
-defineEmits(['highlightPlace', 'selectPlace'])
+defineEmits(['highlightPlace', 'clickPlace'])
 
 const isMobile = useDisplay().mobile
 
@@ -53,7 +53,7 @@ watch(
     <v-card-title v-if="slots.title" class="text-end">
       <slot name="title"></slot>
     </v-card-title>
-    <PlaceItem v-for="place in props.places" :id="'place' + place.id" :key="place.id" :is-selected="selectedPlaceId === place.id" :place="place" @click.stop="$emit('selectPlace', place.id, place.position)" @click-place-photo="clickPlacePhoto" @mouseenter.passive="$emit('highlightPlace', place.id)"/>
+    <PlaceItem v-for="place in props.places" :id="'place' + place.id" :key="place.id" :is-selected="selectedPlaceId === place.id" :place="place" @click.stop="$emit('clickPlace', place.id, place.position)" @click-place-photo="clickPlacePhoto" @mouseenter.passive="$emit('highlightPlace', place.id)"/>
 
     <v-overlay :close-on-content-click="closeOnContentClick" :model-value="showBigPhotos" content-class="d-flex align-center" height="100%" width="100%" @click.self="showBigPhotos = false" @update:modelValue="showBigPhotos = false">
       <v-btn :icon="mdiClose" aria-label="Close" class="hidden-xs" elevation="1" position="absolute" style="right: 1rem; top: 1rem; z-index: 1000" title="Close" @click="showBigPhotos = false"/>
