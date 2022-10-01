@@ -1,6 +1,6 @@
 import {ref} from "vue";
 
-export function useApi(url) {
+export function getPlaces(url) {
   let places = ref([])
 
   fetch(url).then(response => response.json()).then(data => {
@@ -8,4 +8,8 @@ export function useApi(url) {
   })
 
   return {places}
+}
+
+export function getPlaceById(places, id) {
+  return places.value.find(place => place.id === id);
 }

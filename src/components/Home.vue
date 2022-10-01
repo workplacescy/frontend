@@ -3,8 +3,7 @@ import {computed, ref, watchPostEffect} from "vue"
 import {useDisplay} from "vuetify";
 import {useSwipe} from "@vueuse/core";
 import {mdiChevronDown, mdiChevronUp, mdiClose, mdiMenu} from '@mdi/js'
-import {useApi} from "../composable/api.js"
-import {getPlaceById} from "../composable/getPlace.js";
+import {getPlaceById, getPlaces} from "../composable/api.js"
 import Navigation from "./Navigation.vue";
 import Filters from "./Filters.vue";
 import Map from "./Map.vue";
@@ -12,11 +11,16 @@ import Places from "./Places.vue";
 import PlacesCounter from "./PlacesCounter.vue";
 import PlacesCounterButton from "./PlacesCounterButton.vue";
 import PlaceHead from "../components/PlaceHead.vue";
+import NotFound from "./NotFound.vue";
 
 const props = defineProps({
   id: {
     type: [String, Number],
     default: null,
+  },
+  notFound: {
+    type: Boolean,
+    default: false,
   },
 })
 
@@ -54,7 +58,7 @@ useSwipe(bottomDrawerButtonRef, {
   }
 })
 
-const {places} = useApi(import.meta.env.VITE_API_URL);
+const {places} = getPlaces(import.meta.env.VITE_API_URL);
 
 const filtersRef = ref()
 
@@ -90,14 +94,28 @@ const selectedPlaceId = ref()
 const selectedPlacePosition = ref()
 const placesRef = ref()
 
+const isNotFound = ref(props.notFound)
+
 const currentPlace = ref()
 
 watchPostEffect(() => {
-  currentPlace.value = getPlaceById(filteredPlaces, parseInt(props.id))
-
-  if (currentPlace.value === undefined) {
+  if (props.id === null) {
     return
   }
+
+  if (places.value.length === 0) {
+    return
+  }
+
+  currentPlace.value = getPlaceById(places, parseInt(props.id))
+
+  if (currentPlace.value === undefined) {
+    isNotFound.value = true
+
+    return
+  }
+
+  isNotFound.value = false
 
   if (!isMobile) {
     switchBottomDrawer()
@@ -152,8 +170,10 @@ watchPostEffect(() => {
     </template>
 
     <v-main>
+      <NotFound v-if="isNotFound"/>
       <Map ref="mapRef" :highlighted-marker-id="highlightedPlaceId" :is-mobile="isMobile" :opened-marker-id="selectedPlaceId" :opened-marker-position="selectedPlacePosition" :places="filteredPlaces"/>
     </v-main>
+
     <PlaceHead :place="currentPlace"/>
   </v-app>
 </template>
