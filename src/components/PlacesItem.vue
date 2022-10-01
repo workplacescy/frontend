@@ -17,8 +17,8 @@ const emit = defineEmits(['clickPlacePhoto'])
 
 const hasPhotos = computed(() => props.place.photos.length > 0)
 
-function clickPhoto(index, event) {
-  emit('clickPlacePhoto', props.place, index, event)
+function clickPhoto(index) {
+  emit('clickPlacePhoto', props.place, index)
 }
 </script>
 

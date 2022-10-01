@@ -27,11 +27,7 @@ const selectedPhotos = ref()
 const selectedPhotoIndex = ref()
 const showBigPhotos = ref(false)
 
-function clickPlacePhoto(place, index, event) {
-  if (isMobile.value) {
-    event.stopPropagation()
-  }
-
+function clickPlacePhoto(place, index) {
   selectedPhotos.value = place.photos
   selectedPhotoIndex.value = index
   showBigPhotos.value = true
