@@ -1,3 +1,3 @@
 ﻿FROM pierrezemb/gostatic
 COPY ./dist/ /srv/http/
-ENTRYPOINT ["/goStatic", "-enable-logging", "-fallback", "/index.html"]
+ENTRYPOINT ["/goStatic", "-fallback", "/index.html"]
