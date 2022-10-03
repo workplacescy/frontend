@@ -1,17 +1,18 @@
 <script setup>
-import {computed, ref, watchPostEffect} from "vue"
+import {computed, defineAsyncComponent, ref, watchPostEffect} from "vue"
 import {useDisplay} from "vuetify";
 import {useSwipe} from "@vueuse/core";
 import {mdiChevronDown, mdiChevronUp, mdiClose, mdiMenu} from '@mdi/js'
 import {getPlaceById, getPlaces} from "../composable/api.js"
-import Navigation from "./Navigation.vue";
-import Filters from "./Filters.vue";
 import Map from "./Map.vue";
-import Places from "./Places.vue";
-import PlacesCounter from "./PlacesCounter.vue";
-import PlacesCounterButton from "./PlacesCounterButton.vue";
 import PlaceHead from "../components/PlaceHead.vue";
-import NotFound from "./NotFound.vue";
+
+const Navigation = defineAsyncComponent(() => import("./Navigation.vue"))
+const Filters = defineAsyncComponent(() => import("./Filters.vue"))
+const Places = defineAsyncComponent(() => import("./Places.vue"))
+const PlacesCounter = defineAsyncComponent(() => import("./PlacesCounter.vue"))
+const PlacesCounterButton = defineAsyncComponent(() => import("./PlacesCounterButton.vue"))
+const NotFound = defineAsyncComponent(() => import("./NotFound.vue"))
 
 const props = defineProps({
   id: {
@@ -23,7 +24,6 @@ const props = defineProps({
     default: false,
   },
 })
-
 
 // const isMobile = ref(true)
 // const isMobile = ref(false)
@@ -127,42 +127,46 @@ watchPostEffect(() => {
     <v-btn :icon="leftDrawerButton.icon" :style="{transform: leftDrawerButton.left}" aria-label="Switch left drawer" class="left-drawer-button" @click="switchLeftDrawer"/>
 
     <template v-if="isMobile">
-      <v-navigation-drawer ref="leftDrawerRef" v-model="isLeftDrawerOpen" disable-route-watcher="">
+      <v-navigation-drawer ref="leftDrawerRef" v-model="isLeftDrawerOpen" disable-resize-watcher="" disable-route-watcher="">
         <Navigation/>
       </v-navigation-drawer>
 
       <v-btn :icon="mdiChevronUp" aria-label="Switch bottom drawer" class="bottom-drawer-button" color="secondary" style="margin-bottom:1.875rem" @click="switchBottomDrawer"/>
 
-      <v-navigation-drawer v-model="isBottomDrawerOpen" class="bottom-drawer" elevation="4" location="bottom" permanent="" touchless="">
-        <v-btn ref="bottomDrawerButtonRef" :append-icon="mdiChevronDown" :rounded="0" aria-label="Switch bottom drawer" block="" location="top" position="absolute" size="x-small" variant="tonal" @click="switchBottomDrawer"/>
-        <PlacesCounterButton :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:10px" variant="tonal" @click="switchBottomDrawer"/>
+      <KeepAlive>
+        <v-navigation-drawer v-if="isBottomDrawerOpen" class="bottom-drawer" disable-resize-watcher="" elevation="4" location="bottom" permanent="" touchless="">
+          <v-btn ref="bottomDrawerButtonRef" :append-icon="mdiChevronDown" :rounded="0" aria-label="Switch bottom drawer" block="" location="top" position="absolute" size="x-small" variant="tonal" @click="switchBottomDrawer"/>
+          <PlacesCounterButton :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:10px" variant="tonal" @click="switchBottomDrawer"/>
 
-        <Filters ref="filtersRef" @change-collapse="changeCollapse"/>
+          <Filters ref="filtersRef" @change-collapse="changeCollapse"/>
 
-        <PlacesCounterButton v-if="isFiltersExpanded" :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:-44px" variant="tonal" @click="switchBottomDrawer"/>
+          <PlacesCounterButton v-if="isFiltersExpanded" :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:-44px" variant="tonal" @click="switchBottomDrawer"/>
 
-        <Places ref="placesRef" :places="filteredPlaces" :selected-place-id="selectedPlaceId" @click-place="switchBottomDrawer"/>
-      </v-navigation-drawer>
+          <Places ref="placesRef" :places="filteredPlaces" :selected-place-id="selectedPlaceId" @click-place="switchBottomDrawer"/>
+        </v-navigation-drawer>
+      </KeepAlive>
     </template>
     <template v-else>
-      <v-navigation-drawer ref="leftDrawerRef" v-model="isLeftDrawerOpen" disable-route-watcher="" elevation="4" width="500">
-        <div class="panel">
-          <div class="filters overflow-y-auto">
-            <Filters ref="filtersRef"/>
-          </div>
+      <KeepAlive>
+        <v-navigation-drawer v-if="isLeftDrawerOpen" ref="leftDrawerRef" disable-resize-watcher="" disable-route-watcher="" elevation="4" width="500">
+          <div class="panel">
+            <div class="filters overflow-y-auto">
+              <Filters ref="filtersRef"/>
+            </div>
 
-          <div class="places">
-            <Places ref="placesRef" :places="filteredPlaces" :selected-place-id="selectedPlaceId" @highlight-place="highlightPlace">
-              <template #title>
-                <PlacesCounter :places="filteredPlaces"/>
-              </template>
-            </Places>
+            <div class="places">
+              <Places ref="placesRef" :places="filteredPlaces" :selected-place-id="selectedPlaceId" @highlight-place="highlightPlace">
+                <template #title>
+                  <PlacesCounter :places="filteredPlaces"/>
+                </template>
+              </Places>
+            </div>
+            <nav class="navigation">
+              <Navigation :show-title="false"/>
+            </nav>
           </div>
-          <nav class="navigation">
-            <Navigation :show-title="false"/>
-          </nav>
-        </div>
-      </v-navigation-drawer>
+        </v-navigation-drawer>
+      </KeepAlive>
     </template>
 
     <v-main>

@@ -1,9 +1,10 @@
 <script setup>
-import {onMounted, ref, watch} from "vue";
+import {defineAsyncComponent, onMounted, ref, watch} from "vue";
 import {useRouter} from 'vue-router'
 import {useGeolocation, watchOnce} from "@vueuse/core";
 import {mdiCrosshairsGps, mdiRadioboxMarked} from '@mdi/js';
-import MapPlace from "./MapPlacesItem.vue";
+
+const MapPlacesItem = defineAsyncComponent(() => import("./MapPlacesItem.vue"))
 
 const props = defineProps({
   places: Object,
@@ -111,9 +112,9 @@ watch(
     <GMapMarker v-if="hasGeoLocation" :icon="options.marker.icons.current" :position="geoLocation"/>
 
     <GMapCluster :imagePath="options.cluster.imagePath" :maxZoom="options.zooms.map + options.zooms.clusterIncrement" :zoomOnClick="true">
-      <GMapMarker v-for="place in props.places" :key="place.id" :clickable="true" :icon="props.highlightedMarkerId === place.id ? options.marker.icons.highlighted : options.marker.icons.default" :position="place.position" :title="place.title" @click="clickMarker(place.id)">
-        <GMapInfoWindow :opened="props.openedMarkerId === place.id">
-          <MapPlace :place="place"/>
+      <GMapMarker v-for="place in props.places" :key="place.id" v-memo="[props.highlightedMarkerId === place.id]" :clickable="true" :icon="props.highlightedMarkerId === place.id ? options.marker.icons.highlighted : options.marker.icons.default" :position="place.position" :title="place.title" @click="clickMarker(place.id)">
+        <GMapInfoWindow v-if="props.openedMarkerId === place.id" :opened="props.openedMarkerId === place.id">
+          <MapPlacesItem :place="place" v-if="props.openedMarkerId === place.id"/>
         </GMapInfoWindow>
       </GMapMarker>
     </GMapCluster>
