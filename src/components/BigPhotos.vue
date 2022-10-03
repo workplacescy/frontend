@@ -3,6 +3,8 @@ import {Keyboard, Navigation, Pagination} from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/vue'
 import {mdiChevronLeft, mdiChevronRight} from '@mdi/js';
 
+import lazyImageSrc from "../assets/images/image-area.svg"
+
 import 'swiper/css'
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -19,7 +21,7 @@ const modules = [Navigation, Pagination, Keyboard]
 <template>
   <swiper :initial-slide="selectedIndex" :modules="modules" :navigation="{disabledClass: 'd-none', prevEl: '.navigation-prev', nextEl: '.navigation-next'}" :pagination="{clickable: true}" :preload-images="false" grab-cursor keyboard="">
     <swiper-slide v-for="photo in props.photos" v-once :key="photo.default.src" class="align-self-center">
-      <v-img :alt="photo.default.alt" :src="photo.default.src" :title="photo.default.caption" :width="photo.default.width" class="mx-auto" max-height="100vh"/>
+      <v-img :alt="photo.default.alt" :lazy-src="lazyImageSrc" :src="photo.default.src" :title="photo.default.caption" :width="photo.default.width" class="mx-auto" max-height="100vh"/>
     </swiper-slide>
     <v-btn :icon="mdiChevronLeft" aria-label="Prev" class="hidden-xs navigation-prev" elevation="1" location="left center" position="absolute" style="left: 1rem; z-index: 1000" title="Prev"/>
     <v-btn :icon="mdiChevronRight" aria-label="Next" class="hidden-xs navigation-next" elevation="1" location="right center" position="absolute" style="right: 1rem; z-index: 1000" title="Next"/>

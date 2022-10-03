@@ -127,9 +127,11 @@ watchPostEffect(() => {
     <v-btn :icon="leftDrawerButton.icon" :style="{transform: leftDrawerButton.left}" aria-label="Switch left drawer" class="left-drawer-button" @click="switchLeftDrawer"/>
 
     <template v-if="isMobile">
-      <v-navigation-drawer ref="leftDrawerRef" v-model="isLeftDrawerOpen" disable-resize-watcher="" disable-route-watcher="">
-        <Navigation/>
-      </v-navigation-drawer>
+      <KeepAlive>
+        <v-navigation-drawer v-if="isLeftDrawerOpen" ref="leftDrawerRef" :model-value="true" disable-resize-watcher="" disable-route-watcher="">
+          <Navigation/>
+        </v-navigation-drawer>
+      </KeepAlive>
 
       <v-btn :icon="mdiChevronUp" aria-label="Switch bottom drawer" class="bottom-drawer-button" color="secondary" style="margin-bottom:1.875rem" @click="switchBottomDrawer"/>
 
