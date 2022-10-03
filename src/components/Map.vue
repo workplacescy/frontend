@@ -91,7 +91,7 @@ function clickMarker(id) {
 
 function selectMarker(position) {
   mapRef.value.$mapPromise.then((map) => {
-    map.setZoom(options.zooms.map + options.zooms.selectedIncrement)
+    map.setZoom(Math.ceil(options.zooms.map + options.zooms.selectedIncrement))
     map.panTo(position)
   })
 }
