@@ -1,5 +1,5 @@
 <script setup>
-import {computed} from "vue";
+import {computed, ref} from "vue";
 import VRate from "./VRate.vue";
 import PlacesItemPhotos from "./PlacesItemPhotos.vue";
 import PlacesItemProperties from "./PlacesItemProperties.vue";
@@ -20,27 +20,31 @@ const hasPhotos = computed(() => props.place.photos.length > 0)
 function clickPhoto(index) {
   emit('clickPlacePhoto', props.place, index)
 }
+
+const isLazyActive = ref(false)
 </script>
 
 <template>
-  <v-card :class="[hasPhotos ? 'with-photos' : 'pt-4', isSelected ? 'selected' : '']" :link="true" :to="{name: 'place', params: {id: props.place.id}}" density="compact" variant="text">
-    <div v-if="hasPhotos" class="mb-4">
-      <PlacesItemPhotos :photos="props.place.photos" @click-photo="clickPhoto"/>
-    </div>
-    <VRate :value="props.place.vRate" class="float-right mr-4"/>
-    <v-card-subtitle>{{ props.place.type }}</v-card-subtitle>
-    <v-card-title tag="h2">{{ props.place.title }}</v-card-title>
-    <v-card-text>
-      <p v-if="props.place.description" class="description">{{ props.place.description }}</p>
-      <address><p>{{ props.place.address }}</p></address>
-      <div class="d-flex align-end flex-row">
-        <div class="properties">
-          <PlacesItemProperties :place="props.place"/>
-        </div>
-        <ComplainButton/>
+  <v-lazy v-model="isLazyActive" min-height="9rem">
+    <v-card :class="[hasPhotos ? 'with-photos' : 'pt-4', isSelected ? 'selected' : '']" :link="true" :to="{name: 'place', params: {id: props.place.id}}" density="compact" variant="text">
+      <div v-if="hasPhotos" class="mb-4">
+        <PlacesItemPhotos :photos="props.place.photos" @click-photo="clickPhoto"/>
       </div>
-    </v-card-text>
-  </v-card>
+      <VRate :value="props.place.vRate" class="float-right mr-4"/>
+      <v-card-subtitle>{{ props.place.type }}</v-card-subtitle>
+      <v-card-title tag="h2">{{ props.place.title }}</v-card-title>
+      <v-card-text>
+        <p v-if="props.place.description" class="description">{{ props.place.description }}</p>
+        <address><p>{{ props.place.address }}</p></address>
+        <div class="d-flex align-end flex-row">
+          <div class="properties">
+            <PlacesItemProperties :place="props.place"/>
+          </div>
+          <ComplainButton/>
+        </div>
+      </v-card-text>
+    </v-card>
+  </v-lazy>
 </template>
 
 <style scoped>
