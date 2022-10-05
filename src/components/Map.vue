@@ -89,11 +89,27 @@ function clickMarker(id) {
   router.push({name: 'place', params: {id: id}})
 }
 
+const hasCustomCenter = ref(false)
+const hasCustomZoom = ref(false)
+
 function selectMarker(position) {
   mapRef.value.$mapPromise.then((map) => {
-    map.setZoom(Math.ceil(options.zooms.map + options.zooms.selectedIncrement))
     map.panTo(position)
+
+    if (!hasCustomZoom.value) {
+      map.setZoom(Math.ceil(options.zooms.map + options.zooms.selectedIncrement))
+    }
   })
+}
+
+function centerChanged() {
+  hasCustomCenter.value = true
+}
+
+function idle() {
+  if (hasCustomCenter.value) {
+    hasCustomZoom.value = true
+  }
 }
 
 watch(
@@ -105,7 +121,7 @@ watch(
 </script>
 
 <template>
-  <GMapMap ref="mapRef" :center="options.center" :options="options" :zoom="options.zooms.map">
+  <GMapMap ref="mapRef" :center="options.center" :options="options" :zoom="options.zooms.map" @idle="idle" @center_changed.once="centerChanged">
     <div ref="geoLocationButtonRef">
       <v-btn :icon="mdiCrosshairsGps" :loading="isLocationSearching" aria-label="Locate me" class="mb-4 mr-2" elevation="1" title="Locate me" @click="askGeoLocation"/>
     </div>
