@@ -114,7 +114,7 @@ watch(
     <GMapCluster :imagePath="options.cluster.imagePath" :maxZoom="options.zooms.map + options.zooms.clusterIncrement" :zoomOnClick="true">
       <GMapMarker v-for="place in props.places" :key="place.id" v-memo="[props.highlightedMarkerId === place.id]" :clickable="true" :icon="props.highlightedMarkerId === place.id ? options.marker.icons.highlighted : options.marker.icons.default" :position="place.position" :title="place.title" @click="clickMarker(place.id)">
         <GMapInfoWindow v-if="props.openedMarkerId === place.id" :opened="props.openedMarkerId === place.id">
-          <MapPlacesItem :place="place" v-if="props.openedMarkerId === place.id"/>
+          <MapPlacesItem v-if="props.openedMarkerId === place.id" :place="place"/>
         </GMapInfoWindow>
       </GMapMarker>
     </GMapCluster>

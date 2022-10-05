@@ -5,7 +5,7 @@ import {useSwipe} from "@vueuse/core";
 import {mdiChevronDown, mdiChevronUp, mdiClose, mdiMenu} from '@mdi/js'
 import {getPlaceById, getPlaces} from "../composable/api.js"
 import Map from "./Map.vue";
-import PlaceHead from "../components/PlaceHead.vue";
+import PlaceHead from "./PlaceHead.vue";
 
 const Navigation = defineAsyncComponent(() => import("./Navigation.vue"))
 const Filters = defineAsyncComponent(() => import("./Filters.vue"))
@@ -25,12 +25,9 @@ const props = defineProps({
   },
 })
 
-// const isMobile = ref(true)
-// const isMobile = ref(false)
 const isMobile = useDisplay().mobile
 
 const leftDrawerRef = ref();
-
 const isLeftDrawerOpen = ref(false);
 
 function switchLeftDrawer() {
@@ -43,7 +40,6 @@ const leftDrawerButton = computed(() => ({
 }))
 
 const bottomDrawerButtonRef = ref()
-
 const isBottomDrawerOpen = ref(false)
 
 function switchBottomDrawer() {
@@ -92,7 +88,6 @@ function highlightPlace(placeId) {
 
 const selectedPlaceId = ref()
 const selectedPlacePosition = ref()
-const placesRef = ref()
 
 const isNotFound = ref(props.notFound)
 
@@ -144,7 +139,7 @@ watchPostEffect(() => {
 
           <PlacesCounterButton v-if="isFiltersExpanded" :places="filteredPlaces" :rounded="0" class="float-end" style="margin-top:-44px" variant="tonal" @click="switchBottomDrawer"/>
 
-          <Places ref="placesRef" :places="filteredPlaces" :selected-place-id="selectedPlaceId" @click-place="switchBottomDrawer"/>
+          <Places :places="filteredPlaces" :selected-place-id="selectedPlaceId" @click-place="switchBottomDrawer"/>
         </v-navigation-drawer>
       </KeepAlive>
     </template>
@@ -157,7 +152,7 @@ watchPostEffect(() => {
             </div>
 
             <div class="places">
-              <Places ref="placesRef" :places="filteredPlaces" :selected-place-id="selectedPlaceId" @highlight-place="highlightPlace">
+              <Places :places="filteredPlaces" :selected-place-id="selectedPlaceId" @highlight-place="highlightPlace">
                 <template #title>
                   <PlacesCounter :places="filteredPlaces"/>
                 </template>
