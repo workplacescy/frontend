@@ -6,11 +6,11 @@ const props = defineProps({
   value: Number,
 })
 
-const color = computed(() => useColorByValueHsl({ratio: props.value / 5}))
+const color = computed(() => useColorByValueHsl({ratioMin: 1.9, ratio: props.value}))
 </script>
 
 <template>
-  <div :style="{backgroundColor: 'hsl(' + color + ', 70%, 50%)'}" title="Vladimir's rating">
+  <div :style="{backgroundColor: 'hsl(' + color.hue + ', ' + color.saturation + '%, ' + color.lightness + '%)'}" title="Vladimir's rating">
     {{ props.value }}
   </div>
 </template>
