@@ -116,6 +116,14 @@ defineExpose({filtersRef})
   </template>
 </template>
 
+<style>
+.bottom-drawer {
+  height: 99% !important;
+  padding-top: 1.25rem;
+  z-index: 2000 !important;
+}
+</style>
+
 <style scoped>
 .left-drawer-button {
   margin-left: 0.5rem;
@@ -126,7 +134,6 @@ defineExpose({filtersRef})
   z-index: 2000;
 }
 
-
 .bottom-drawer-button {
   bottom: 0;
   left: 50%;
@@ -135,13 +142,6 @@ defineExpose({filtersRef})
   transform: translateX(-50%);
   z-index: 1003;
 }
-
-:deep(.bottom-drawer) {
-  height: 99% !important;
-  padding-top: 1.25rem;
-  z-index: 2000 !important;
-}
-
 
 .panel {
   display: grid;
