@@ -1,4 +1,3 @@
-import "./components/Sentry.js";
 // import Analytics from "./src/Analytics";
 
 import {createApp} from 'vue'
@@ -6,13 +5,27 @@ import {createHead} from "@vueuse/head"
 import {createVuetify} from "vuetify";
 import {mdi} from 'vuetify/iconsets/mdi-svg'
 import VueGoogleMaps from '@fawmi/vue-google-maps'
+import * as Sentry from "@sentry/vue";
+import {BrowserTracing} from "@sentry/tracing";
 import App from './App.vue'
 import router from './router'
 
 import 'vuetify/styles'
 import './main.scss'
 
-createApp(App)
+const app = createApp(App);
+
+Sentry.init({
+  app,
+  dsn: import.meta.env.VITE_SENTRY_DSN,
+  integrations: [new BrowserTracing({
+    routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+    tracingOrigins: ["localhost", import.meta.env.VITE_APP_URL, /^\//],
+  })],
+  logErrors: true,
+});
+
+app
     .use(router)
     .use(createHead())
     .use(createVuetify({
