@@ -9,7 +9,7 @@ useHead({
   titleTemplate: '%s | Workplaces in Cyprus',
   meta: [
     {
-      name: `robots`,
+      name: 'robots',
       content: 'noindex'
     },
   ],
