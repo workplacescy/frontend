@@ -8,6 +8,7 @@ import vue from '@vitejs/plugin-vue'
 // import minify from "vite-plugin-minify";
 import vuetify from "vite-plugin-vuetify";
 import VitePluginRadar from "vite-plugin-radar";
+import {VitePWA} from "vite-plugin-pwa";
 
 export default mode => {
   process.env = {...process.env, ...loadEnv(mode, process.cwd())};
@@ -55,6 +56,57 @@ export default mode => {
       }),
       vue(),
       vuetify({styles: {configFile: 'src/settings.scss'}}),
+      VitePWA({
+        injectRegister: 'inline',
+        includeAssets: [
+          'favicon.ico',
+          'apple-touch-icon.png',
+        ],
+        manifest: {
+          "background_color": "#ffffff",
+          "display": "standalone",
+          "name": "Workplaces in Cyprus",
+          "short_name": "Workplaces in Cyprus",
+          "start_url": "/?utm_source=homescreen",
+          "theme_color": "#ffffff",
+          "icons": [
+            {
+              "src": "icon.svg",
+              "type": "image/svg",
+              "sizes": "any"
+            },
+            {
+              "src": "icon-192.png",
+              "type": "image/png",
+              "sizes": "192x192"
+            },
+            {
+              "src": "icon-512.png",
+              "type": "image/png",
+              "sizes": "512x512"
+            },
+            {
+              "src": "icon-maskable-192.png",
+              "type": "image/png",
+              "sizes": "192x192",
+              "purpose": "maskable"
+            },
+            {
+              "src": "icon-maskable-512.png",
+              "type": "image/png",
+              "sizes": "512x512",
+              "purpose": "maskable"
+            }
+          ],
+        },
+        workbox: {
+          globPatterns: ['**/*.{css,html,ico,js,json,png,svg}'],
+          runtimeCaching: [{
+            handler: 'StaleWhileRevalidate',
+            urlPattern: /\.(?:cur|jpg|jpeg|json|png|svg)$/
+          }],
+        },
+      })
     ],
   });
 }
