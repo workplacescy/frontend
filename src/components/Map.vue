@@ -2,6 +2,7 @@
 import {defineAsyncComponent, onMounted, ref, watch} from "vue";
 import {useRouter} from 'vue-router'
 import {useGeolocation, watchOnce} from "@vueuse/core";
+import {useHead} from "@vueuse/head";
 import {mdiCrosshairsGps, mdiRadioboxMarked} from '@mdi/js';
 
 const MapPlacesItem = defineAsyncComponent(() => import("./MapPlacesItem.vue"))
@@ -118,6 +119,15 @@ watch(
       selectMarker(position)
     }
 )
+
+useHead({
+  link: [
+    {
+      rel: 'preconnect',
+      href: 'https://maps.googleapis.com',
+    },
+  ],
+})
 </script>
 
 <template>
