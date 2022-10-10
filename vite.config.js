@@ -4,8 +4,6 @@ import replace from '@rollup/plugin-replace';
 import {createHtmlPlugin} from "vite-plugin-html";
 import minify from "vite-plugin-minify";
 import vue from '@vitejs/plugin-vue'
-// import htmlPurge from 'vite-plugin-html-purgecss'
-// import minify from "vite-plugin-minify";
 import vuetify from "vite-plugin-vuetify";
 import VitePluginRadar from "vite-plugin-radar";
 import {VitePWA} from "vite-plugin-pwa";
@@ -32,7 +30,6 @@ export default mode => {
         __SENTRY_TRACING__: false,
         preventAssignment: true,
       }),
-      // htmlPurge(['marker-label']),
       createHtmlPlugin({minify: false}),
       minify({
         collapseBooleanAttributes: true,

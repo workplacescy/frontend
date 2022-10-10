@@ -25,5 +25,3 @@ useHead({
     Place not found
   </v-snackbar>
 </template>
-
-<style scoped></style>
