@@ -97,10 +97,10 @@ export default mode => {
           ],
         },
         workbox: {
-          globPatterns: ['**/*.{css,html,ico,js,json,png,svg}'],
+          globPatterns: ['**/*.{css,html,ico,jpg,js,json,png,svg,webp}'],
           runtimeCaching: [{
             handler: 'StaleWhileRevalidate',
-            urlPattern: /\.(?:cur|jpg|jpeg|json|png|svg)$/
+            urlPattern: /\.(?:cur|jpg|jpeg|json|png|svg|webp)$/
           }],
         },
       })
