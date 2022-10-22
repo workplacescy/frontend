@@ -26,7 +26,6 @@
     "@fawmi/vue-google-maps": "0.9.72",
     "@mdi/js": "*",
     "@rollup/plugin-replace": "*",
-    "@sentry/browser": "*",
     "@sentry/tracing": "*",
     "@sentry/vue": "*",
     "@vitejs/plugin-vue": "*",
