@@ -81,7 +81,9 @@ defineExpose({filtersRef})
     <KeepAlive>
       <v-navigation-drawer v-if="isBottomDrawerOpen" class="bottom-drawer" disable-resize-watcher="" elevation="4" location="bottom" permanent="" touchless="">
         <v-btn ref="bottomDrawerButtonRef" :append-icon="mdiChevronDown" :rounded="0" aria-label="Switch bottom drawer" block="" location="top" position="absolute" size="x-small" variant="tonal" @click="switchBottomDrawer"/>
-        <PlacesCounterButton :places="props.filteredPlaces" :rounded="0" class="float-end" style="margin-top:10px" variant="tonal" @click="switchBottomDrawer"/>
+        <div class="position-relative">
+          <PlacesCounterButton :places="props.filteredPlaces" :rounded="0" class="position-absolute" style="margin-top:10px;right:0" variant="tonal" @click="switchBottomDrawer"/>
+        </div>
 
         <Filters ref="filtersRef" @change-collapse="changeCollapse"/>
 
