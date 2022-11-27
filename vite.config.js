@@ -55,10 +55,6 @@ export default mode => {
       vuetify({styles: {configFile: 'src/settings.scss'}}),
       VitePWA({
         injectRegister: 'inline',
-        includeAssets: [
-          'favicon.ico',
-          'apple-touch-icon.png',
-        ],
         manifest: {
           "background_color": "#ffffff",
           "display": "standalone",
@@ -97,7 +93,7 @@ export default mode => {
           ],
         },
         workbox: {
-          globPatterns: ['**/*.{css,html,ico,jpg,js,json,png,svg,webp}'],
+          globPatterns: ['**/*.{css,html,ico,jpg,js,png,svg,txt,webp}'],
           runtimeCaching: [{
             handler: 'StaleWhileRevalidate',
             urlPattern: /\.(?:cur|jpg|jpeg|json|png|svg|webp)$/
