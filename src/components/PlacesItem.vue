@@ -3,6 +3,7 @@ import {computed, ref} from "vue";
 import VRate from "./VRate.vue";
 import PlacesItemPhotos from "./PlacesItemPhotos.vue";
 import PlacesItemProperties from "./PlacesItemProperties.vue";
+import PlacesItemWiFi from "./PlacesItemWiFi.vue";
 import ComplainButton from "./ComplainButton.vue";
 
 const props = defineProps({
@@ -37,8 +38,13 @@ const isLazyActive = ref(false)
         <p v-if="props.place.description" class="description">{{ props.place.description }}</p>
         <address><p>{{ props.place.address }}</p></address>
         <div class="d-flex align-end flex-row">
-          <div class="properties">
-            <PlacesItemProperties :place="props.place"/>
+          <div>
+            <div class="properties">
+              <PlacesItemProperties :place="props.place"/>
+            </div>
+            <div class="properties">
+              <PlacesItemWiFi :place="props.place"/>
+            </div>
           </div>
           <ComplainButton/>
         </div>

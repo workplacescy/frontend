@@ -17,8 +17,8 @@ useHead({
     {
       name: 'description',
       content: computed(() => props.place
-          ? `${props.place.type} ${props.place.title}. ${props.place.address}. Rating ${props.place.vRate}. ${(props.place.description ? props.place.description + '. ' : '')} ${humanize.sockets(props.place.sockets)}, ${humanize.noise(props.place.noise)}, ${humanize.size(props.place.size)}, ${humanize.busyness(props.place.busyness)}, ${humanize.view(props.place.view)}, ${humanize.cuisine(props.place.cuisine)}`
-          : 'Map and list of workplaces (coffeeshops, cafes and coworkings) in Cyprus: Nicosia, Limassol, Larnaca, Paphos. For digital nomads and freelancers'
+          ? `${props.place.type} ${props.place.title}. ${props.place.address}. Rating ${props.place.vRate}. ${(props.place.description ? props.place.description + '. ' : '')} ${humanize.sockets(props.place.sockets)}, ${humanize.noise(props.place.noise)}, ${humanize.size(props.place.size)}, ${humanize.busyness(props.place.busyness)}, ${humanize.view(props.place.view)}, ${humanize.cuisine(props.place.cuisine)}${(props.place.wifi.name ? '. Wi-Fi name ' + props.place.wifi.name : '')}${(props.place.wifi.password ? ', Wi-Fi password ' + props.place.wifi.password : '')}`
+          : 'Map and list of workplaces (coffeeshops, cafes and coworkings) in Cyprus: Nicosia, Limassol, Larnaca, Paphos. With amenities, features, rating and Wi-Fi passwords. For digital nomads and freelancers'
       )
     },
   ],
