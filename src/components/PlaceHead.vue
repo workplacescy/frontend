@@ -12,7 +12,10 @@ const props = defineProps({
 
 useHead({
   title: computed(() => props.place?.title),
-  titleTemplate: '%s | Workplaces in Cyprus',
+  titleTemplate: computed(() => props.place
+      ? '%s | Workplaces in Cyprus'
+      : null
+  ),
   meta: [
     {
       name: 'description',
