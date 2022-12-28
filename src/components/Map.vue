@@ -3,7 +3,7 @@ import {defineAsyncComponent, onMounted, ref, watch} from "vue";
 import {useRouter} from 'vue-router'
 import {useGeolocation, watchOnce} from "@vueuse/core";
 import {useHead} from "@vueuse/head";
-import {mdiCrosshairsGps, mdiRadioboxMarked} from '@mdi/js';
+import {mdiCrosshairsGps, mdiLightningBolt, mdiRadioboxMarked} from '@mdi/js';
 
 const MapPlacesItem = defineAsyncComponent(() => import("./MapPlacesItem.vue"))
 
@@ -49,15 +49,17 @@ const options = {
 }
 
 const mapRef = ref()
+const newButtonRef = ref()
 const geoLocationButtonRef = ref()
 
 onMounted(() => {
-  addControls(mapRef.value, geoLocationButtonRef.value)
+  addControls(mapRef.value, geoLocationButtonRef.value, newButtonRef.value)
 })
 
-function addControls(mapContainer, controls) {
+function addControls(mapContainer, controls, newButton) {
   mapContainer.$mapPromise.then(map => {
     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controls);
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(newButton);
   });
 }
 
@@ -132,6 +134,9 @@ useHead({
 
 <template>
   <GMapMap ref="mapRef" :center="options.center" :options="options" :zoom="options.zooms.map" @idle="idle" @center_changed.once="centerChanged">
+    <div ref="newButtonRef">
+      <v-btn :prepend-icon="mdiLightningBolt" class="mt-2" color="primary" elevation="1" href="https://workplaces.digital/" rel="nofollow noopener" target="_blank">Try new</v-btn>
+    </div>
     <div ref="geoLocationButtonRef">
       <v-btn :icon="mdiCrosshairsGps" :loading="isLocationSearching" aria-label="Locate me" class="mb-4 mr-2" elevation="1" title="Locate me" @click="askGeoLocation"/>
     </div>
